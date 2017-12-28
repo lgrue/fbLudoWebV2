@@ -32,26 +32,18 @@ namespace fbLudoWebFinal.Account
         public bool TwoFactorBrowserRemembered { get; private set; }
 
         public int LoginsCount { get; set; }
-
-        public bool HasAnrede { get; set; }
-        public bool HasVorname { get; set; }
-        public bool HasNachname { get; set; }
-        public bool HasPLZ { get; set; }
-        public bool HasOrt { get; set; }
-        public bool HasAdresse { get; set; }
-
         protected void Page_Load()
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var currentUser = manager.FindById(User.Identity.GetUserId());
 
             HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
-            HasAnrede = String.IsNullOrEmpty(currentUser.Anrede);
-            HasVorname = String.IsNullOrEmpty(currentUser.Vorname);
-            HasNachname = String.IsNullOrEmpty(currentUser.Nachname);
-            HasPLZ = String.IsNullOrEmpty(currentUser.PLZ.ToString());
-            HasOrt = String.IsNullOrEmpty(currentUser.Ort);
-            HasAdresse = String.IsNullOrEmpty(currentUser.Adresse);
+            Anrede.Text = currentUser.Anrede;
+            Vorname.Text = currentUser.Vorname;
+            Nachname.Text = currentUser.Nachname;
+            PLZ.Text = currentUser.PLZ.ToString();
+            Ort.Text = currentUser.Ort;
+            Adresse.Text = currentUser.Adresse;
 
             // Option nach dem Einrichten der zweistufigen Authentifizierung aktivieren
             //PhoneNumber.Text = manager.GetPhoneNumber(User.Identity.GetUserId()) ?? String.Empty;
@@ -88,6 +80,7 @@ namespace fbLudoWebFinal.Account
                         : message == "RemoveLoginSuccess" ? "Das Konto wurde entfernt."
                         : message == "AddPhoneNumberSuccess" ? "Die Telefonnummer wurde hinzugefügt."
                         : message == "RemovePhoneNumberSuccess" ? "Die Telefonnummer wurde entfernt."
+                        : message == "SaveDataSuccess" ? "Die persönlichen Daten wurden erfolgreich gespeichert."
                         : String.Empty;
                     successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
                 }
@@ -137,6 +130,20 @@ namespace fbLudoWebFinal.Account
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
 
             Response.Redirect("/Account/Manage");
+        }
+
+        protected void SaveData_Click(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            currentUser.Anrede = Anrede.Text;
+            currentUser.Vorname = Vorname.Text;
+            currentUser.Nachname = Nachname.Text;
+            currentUser.PLZ = Convert.ToInt32(PLZ.Text);
+            currentUser.Ort = Ort.Text;
+            currentUser.Adresse = "HURENSOHN";
+
+            Response.Redirect("/Account/Manage?m=SaveDataSuccess");
         }
     }
 }

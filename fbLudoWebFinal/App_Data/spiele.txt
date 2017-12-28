@@ -1,0 +1,6 @@
+1:Spiel Numero Uno
+2:Spiel Numero Dos
+3:Spiel Numero Tres 
+4:Spiel Numero Vier
+5:Spiel Numero Fünf
+6:Spiel Numero Sex

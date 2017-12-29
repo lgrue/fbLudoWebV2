@@ -1,12 +1,4 @@
-1:aaron.zellweger@gmail.com:6:Spiel Numero Sex
-<<<<<<< HEAD
-1::5:Spiel Numero F�nf
-1:luca.grueninger@gmx.chh:2:Spiel Numero Dos
-1:luca.grueninger@gmx.chh:2:Spiel Numero Dos
-1:luca.grueninger@gmx.ch:6:Spiel Numero Sex
-1:luca.grueninger@gmx.ch:2:Spiel Numero Dos
-1:luca.grueninger@gmx.ch:1:Spiel Numero Uno
-=======
-2:aaron.zellweger@hotmail.ch:1:Spiel Numero Uno
-2:aaron.zellweger@hotmail.ch:5:Spiel Numero F�nf
->>>>>>> c6183f1c5413be45ca2c63972eeed745f74385a7
+﻿1:aaron.zellweger@gmail.com:6:Spiel Numero Sex1:luca.grueninger@gmx.ch:1:Spiel Numero Uno
+1:luca.grueninger@gmx.ch:3:Spiel Numero Tres
+2:luca.grueninger@gmx.ch:2:Spiel Numero Dos
+3:luca.grueninger@gmx.ch:4:Spiel Numero Vier

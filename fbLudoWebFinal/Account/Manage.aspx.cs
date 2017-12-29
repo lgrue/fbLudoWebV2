@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using fbLudoWebFinal.Models;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace fbLudoWebFinal.Account
 {
@@ -38,12 +41,6 @@ namespace fbLudoWebFinal.Account
             var currentUser = manager.FindById(User.Identity.GetUserId());
 
             HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
-            Anrede.Text = currentUser.Anrede;
-            Vorname.Text = currentUser.Vorname;
-            Nachname.Text = currentUser.Nachname;
-            PLZ.Text = currentUser.PLZ.ToString();
-            Ort.Text = currentUser.Ort;
-            Adresse.Text = currentUser.Adresse;
 
             // Option nach dem Einrichten der zweistufigen Authentifizierung aktivieren
             //PhoneNumber.Text = manager.GetPhoneNumber(User.Identity.GetUserId()) ?? String.Empty;
@@ -81,9 +78,17 @@ namespace fbLudoWebFinal.Account
                         : message == "AddPhoneNumberSuccess" ? "Die Telefonnummer wurde hinzugefügt."
                         : message == "RemovePhoneNumberSuccess" ? "Die Telefonnummer wurde entfernt."
                         : message == "SaveDataSuccess" ? "Die persönlichen Daten wurden erfolgreich gespeichert."
+                        : message == "AddData" ? "Bitte füllen Sie zuerst Ihre persönlichen Daten aus."
                         : String.Empty;
                     successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
                 }
+
+                Anrede.Text = currentUser.Anrede;
+                Vorname.Text = currentUser.Vorname;
+                Nachname.Text = currentUser.Nachname;
+                PLZ.Text = currentUser.PLZ.ToString();
+                Ort.Text = currentUser.Ort;
+                Adresse.Text = currentUser.Adresse;
             }
         }
 
@@ -134,16 +139,19 @@ namespace fbLudoWebFinal.Account
 
         protected void SaveData_Click(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var currentUser = manager.FindById(User.Identity.GetUserId());
-            currentUser.Anrede = Anrede.Text;
-            currentUser.Vorname = Vorname.Text;
-            currentUser.Nachname = Nachname.Text;
-            currentUser.PLZ = Convert.ToInt32(PLZ.Text);
-            currentUser.Ort = Ort.Text;
-            currentUser.Adresse = "HURENSOHN";
-
-            Response.Redirect("/Account/Manage?m=SaveDataSuccess");
+            using (var context = new ApplicationDbContext())
+            {
+                var id = User.Identity.GetUserId();
+                var user = context.Users.Single(x => x.Id == id);
+                user.Anrede = Anrede.Text;
+                user.Vorname = Vorname.Text;
+                user.Nachname = Nachname.Text;
+                user.PLZ = Convert.ToInt32(PLZ.Text);
+                user.Ort = Ort.Text;
+                user.Adresse = Adresse.Text;
+                user.FirstLogin = true;
+                context.SaveChanges();
+            }
         }
     }
 }

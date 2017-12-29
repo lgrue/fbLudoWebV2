@@ -21,6 +21,10 @@ namespace fbLudoWebFinal.Models
         public string Ort { get; set; }
         public string Adresse { get; set; }
 
+        public void setData(string anrede) {
+            this.Anrede = anrede;
+        }
+
         public ClaimsIdentity GenerateUserIdentity(ApplicationUserManager manager)
         {
             // Beachten Sie, dass der "authenticationType" mit dem in "CookieAuthenticationOptions.AuthenticationType" definierten Typ übereinstimmen muss.

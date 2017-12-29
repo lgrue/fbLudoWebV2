@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -13,11 +15,28 @@ namespace fbLudoWebFinal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            if (currentUser != null)
             {
-                DataTable dataTable = ConvertToDataTable("~/App_Data/ausleihen.txt", 4);
-                GridView1.DataSource = dataTable;
-                GridView1.DataBind();
+                if (currentUser.FirstLogin == false)
+                {
+                    Response.Redirect("/Account/Manage?m=AddData");
+                }
+                else
+                {
+                    if (!Page.IsPostBack)
+                    {
+                        DataTable dataTable = ConvertToDataTable("~/App_Data/ausleihen.txt", 4);
+                        GridView1.DataSource = dataTable;
+                        GridView1.DataBind();
+                    }
+                }
+            }
+            else
+            {
+                Response.Redirect("/");
             }
         }
 

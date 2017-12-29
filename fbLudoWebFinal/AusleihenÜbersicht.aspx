@@ -2,5 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
-    <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+    <asp:Table class="table table-striped table-dark" ID="tblAusleihenAktiv" runat="server" width="100%"></asp:Table>
+    <asp:Table class="table table-striped table-dark" ID="tblAusleihenIaktiv" runat="server" width="100%"></asp:Table>
 </asp:Content>

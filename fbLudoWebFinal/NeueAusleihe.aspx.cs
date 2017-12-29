@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,13 +15,31 @@ namespace fbLudoWebFinal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack) {
-                DataTable dataTable = ConvertToDataTable("~/App_Data/spiele.txt", 2);
-                DropDownList1.DataSource = dataTable;
-                DropDownList1.DataTextField = "Column2";
-                DropDownList1.DataValueField = "Column1";
-                DropDownList1.AutoPostBack = false;
-                DropDownList1.DataBind();
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            if (currentUser != null)
+            {
+                if (currentUser.FirstLogin == false)
+                {
+                    Response.Redirect("/Account/Manage?m=AddData");
+                }
+                else
+                {
+                    if (!Page.IsPostBack)
+                    {
+                        DataTable dataTable = ConvertToDataTable("~/App_Data/spiele.txt", 2);
+                        DropDownList1.DataSource = dataTable;
+                        DropDownList1.DataTextField = "Column2";
+                        DropDownList1.DataValueField = "Column1";
+                        DropDownList1.AutoPostBack = false;
+                        DropDownList1.DataBind();
+                    }
+                }
+            }
+            else
+            {
+                Response.Redirect("/");
             }
         }
 

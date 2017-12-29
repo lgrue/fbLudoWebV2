@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -13,8 +15,24 @@ namespace fbLudoWebFinal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            if (currentUser != null)
             {
+                if (currentUser.FirstLogin == false)
+                {
+                    Response.Redirect("/Account/Manage?m=AddData");
+                }
+                else
+                {
+                    if (!Page.IsPostBack)
+                    {
+                        DataTable dataTable = ConvertToDataTable("~/App_Data/ausleihen.txt", 4);
+                        GridView1.DataSource = dataTable;
+                        GridView1.DataBind();
+                    }
+                }
                 var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
                 string[] lines = File.ReadAllLines(dataFile);
                 foreach (string line in lines)
@@ -45,6 +63,10 @@ namespace fbLudoWebFinal
 
                     tblAusleihenAktiv.Rows.Add(row);
                 }
+            }
+            else
+            {
+                Response.Redirect("/");
             }
         }
 

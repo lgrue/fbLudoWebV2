@@ -50,14 +50,16 @@ namespace fbLudoWebFinal
             foreach (string line in lines)
             {
                 var cols = line.Split(':');
-
-                DataRow dr = tbl.NewRow();
-                for (int cIndex = 0; cIndex < numberOfColumns; cIndex++)
+                if (cols[3] == "1")
                 {
-                    dr[cIndex] = cols[cIndex];
-                }
+                    DataRow dr = tbl.NewRow();
+                    for (int cIndex = 0; cIndex < numberOfColumns; cIndex++)
+                    {
+                        dr[cIndex] = cols[cIndex];
+                    }
 
-                tbl.Rows.Add(dr);
+                    tbl.Rows.Add(dr);
+                }
             }
 
             return tbl;

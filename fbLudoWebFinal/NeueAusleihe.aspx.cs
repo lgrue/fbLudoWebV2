@@ -34,6 +34,7 @@ namespace fbLudoWebFinal
             {
                 _testData.WriteLine(txt); // Write the file.
             }
+
             Server.Transfer("AusleihenÜbersicht.aspx", true);
         }
 

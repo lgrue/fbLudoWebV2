@@ -46,22 +46,32 @@ namespace fbLudoWebFinal
         
         public void ausleihen(Object sender, EventArgs e)
         {
-            var id = 1;
+            var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
+            string[] lines = File.ReadAllLines(dataFile);
+            var id = lines.Count();
             var name = Context.User.Identity.GetUserName();
             var txt = id.ToString() + ":" + name + ":" + DropDownList1.SelectedValue + ":" + DropDownList1.SelectedItem;
             using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/ausleihen.txt"), true))
             {
                 _testData.WriteLine(txt); // Write the file.
             }
-            var dataFile = Server.MapPath("~/App_Data/spiele.txt");
-            string[] lines = File.ReadAllLines(dataFile);
-            var spielid = Int32.Parse(DropDownList1.SelectedValue) - 1;
-            lines[spielid].Split(':')[2] = "0";
+            dataFile = Server.MapPath("~/App_Data/spiele.txt");
+            lines = File.ReadAllLines(dataFile);
+            File.WriteAllText(dataFile, String.Empty);
             using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/spiele.txt"), true))
             {
                 foreach (string line in lines)
                 {
-                    _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
+                    var cols = line.Split(':');
+                    if (cols[0] == DropDownList1.SelectedValue) {
+                        cols[2] = "0";
+                        var newline = cols[0] + ":" + cols[1] + ":" + cols[2];
+                        _testData.WriteLine(newline); // Write the file.var cols = line.Split(':');
+                    }
+                    else
+                    {
+                        _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
+                    }
                 }
                 
             }

@@ -28,40 +28,40 @@ namespace fbLudoWebFinal
                 {
                     if (!Page.IsPostBack)
                     {
-                        DataTable dataTable = ConvertToDataTable("~/App_Data/ausleihen.txt", 4);
-                        GridView1.DataSource = dataTable;
-                        GridView1.DataBind();
-                    }
-                }
-                var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
-                string[] lines = File.ReadAllLines(dataFile);
-                foreach (string line in lines)
-                {
-                    var cols = line.Split(':');
-
-                    var row = new TableRow();
-                    for (int cIndex = 0; cIndex < 7; cIndex++)
-                    {
-                        var cell = new TableCell();
-                        if (cIndex < 4)
+                        var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
+                        string[] lines = File.ReadAllLines(dataFile);
+                        foreach (string line in lines)
                         {
-                            cell.Text = cols[cIndex];
-                        }else if(cIndex == 5){
-                            Button button = new Button();
-                            button.Text = "Verlängern";
-                            /*button.Click += verlängern();*/
-                            cell.Controls.Add(button);
-                        }
-                        else if(cIndex == 6){
-                            Button button = new Button();
-                            button.Text = "Zurückgeben";
-                            /*button.Click += new RoutedEventHandler(zurückbringen);*/
-                            cell.Controls.Add(button);
-                        }
-                        row.Cells.Add(cell);
-                    }
+                            var cols = line.Split(':');
 
-                    tblAusleihenAktiv.Rows.Add(row);
+                            var row = new TableRow();
+                            for (int cIndex = 0; cIndex < 7; cIndex++)
+                            {
+                                var cell = new TableCell();
+                                if (cIndex < 4)
+                                {
+                                    cell.Text = cols[cIndex];
+                                }
+                                else if (cIndex == 5)
+                                {
+                                    Button button = new Button();
+                                    button.Text = "Verlängern";
+                                    /*button.Click += verlängern();*/
+                                    cell.Controls.Add(button);
+                                }
+                                else if (cIndex == 6)
+                                {
+                                    Button button = new Button();
+                                    button.Text = "Zurückgeben";
+                                    /*button.Click += new RoutedEventHandler(zurückbringen);*/
+                                    cell.Controls.Add(button);
+                                }
+                                row.Cells.Add(cell);
+                            }
+
+                            tblAusleihenAktiv.Rows.Add(row);
+                        }
+                    }
                 }
             }
             else

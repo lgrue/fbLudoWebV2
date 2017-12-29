@@ -3,4 +3,4 @@
 3:Spiel Numero Tres:1
 4:Spiel Numero Vier:1
 5:Spiel Numero Fünf:1
-6:Spiel Numero Sex:1
+6:Spiel Numero Sex:0

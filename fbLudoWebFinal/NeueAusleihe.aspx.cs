@@ -53,7 +53,18 @@ namespace fbLudoWebFinal
             {
                 _testData.WriteLine(txt); // Write the file.
             }
-
+            var dataFile = Server.MapPath("~/App_Data/spiele.txt");
+            string[] lines = File.ReadAllLines(dataFile);
+            var spielid = Int32.Parse(DropDownList1.SelectedValue) - 1;
+            lines[spielid].Split(':')[2] = "0";
+            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/spiele.txt"), true))
+            {
+                foreach (string line in lines)
+                {
+                    _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
+                }
+                
+            }
             Server.Transfer("AusleihenÜbersicht.aspx", true);
         }
 
@@ -70,7 +81,7 @@ namespace fbLudoWebFinal
             foreach (string line in lines)
             {
                 var cols = line.Split(':');
-                if (cols[3] == "1")
+                if (cols[2] == "1")
                 {
                     DataRow dr = tbl.NewRow();
                     for (int cIndex = 0; cIndex < numberOfColumns; cIndex++)

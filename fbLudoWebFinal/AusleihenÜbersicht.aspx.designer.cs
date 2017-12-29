@@ -13,17 +13,12 @@ namespace fbLudoWebFinal {
     public partial class AusleihenÜbersicht {
         
         /// <summary>
-<<<<<<< Updated upstream
         /// tblAusleihenAktiv-Steuerelement
-=======
-        /// tblAusleihen-Steuerelement
->>>>>>> Stashed changes
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-<<<<<<< Updated upstream
         protected global::System.Web.UI.WebControls.Table tblAusleihenAktiv;
         
         /// <summary>
@@ -34,8 +29,5 @@ namespace fbLudoWebFinal {
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblAusleihenIaktiv;
-=======
-        protected global::System.Web.UI.WebControls.Table tblAusleihen;
->>>>>>> Stashed changes
     }
 }

@@ -13,6 +13,15 @@ namespace fbLudoWebFinal {
     public partial class NeueAusleihe {
         
         /// <summary>
+        /// successMessage-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder successMessage;
+        
+        /// <summary>
         /// DropDownList1-Steuerelement
         /// </summary>
         /// <remarks>

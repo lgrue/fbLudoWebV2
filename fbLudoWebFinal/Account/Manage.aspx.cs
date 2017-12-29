@@ -151,6 +151,8 @@ namespace fbLudoWebFinal.Account
                 user.Adresse = Adresse.Text;
                 user.FirstLogin = true;
                 context.SaveChanges();
+
+                Response.Redirect("/NeueAusleihe?m=SaveDataSuccess");
             }
         }
     }

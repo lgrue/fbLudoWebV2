@@ -2,3 +2,6 @@
 1::5:Spiel Numero F�nf
 1:luca.grueninger@gmx.chh:2:Spiel Numero Dos
 1:luca.grueninger@gmx.chh:2:Spiel Numero Dos
+1:luca.grueninger@gmx.ch:6:Spiel Numero Sex
+1:luca.grueninger@gmx.ch:2:Spiel Numero Dos
+1:luca.grueninger@gmx.ch:1:Spiel Numero Uno

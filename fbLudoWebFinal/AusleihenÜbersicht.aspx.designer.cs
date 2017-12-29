@@ -13,12 +13,12 @@ namespace fbLudoWebFinal {
     public partial class AusleihenÜbersicht {
         
         /// <summary>
-        /// GridView1-Steuerelement
+        /// tblAusleihen-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Table tblAusleihen;
     }
 }

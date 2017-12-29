@@ -74,14 +74,5 @@ namespace fbLudoWebFinal.Account {
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink ForgotPasswordHyperLink;
-        
-        /// <summary>
-        /// OpenAuthLogin-Steuerelement
-        /// </summary>
-        /// <remarks>
-        /// Automatisch generiertes Feld
-        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
-        /// </remarks>
-        protected global::fbLudoWebFinal.Account.OpenAuthProviders OpenAuthLogin;
     }
 }

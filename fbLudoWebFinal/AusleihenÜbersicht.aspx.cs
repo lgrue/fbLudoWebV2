@@ -46,7 +46,7 @@ namespace fbLudoWebFinal
                     tblAusleihenIaktiv.Rows.Add(hrow);
                     var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
                     string[] lines = File.ReadAllLines(dataFile);
-                    if (lines.Count() > 1)
+                    if (lines.Count() > 0)
                     {
                         foreach (string line in lines)
                         {

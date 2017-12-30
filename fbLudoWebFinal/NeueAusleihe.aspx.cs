@@ -13,6 +13,12 @@ namespace fbLudoWebFinal
 {
     public partial class NeueAusleihe : Page
     {
+        protected string SuccessMessage
+        {
+            get;
+            private set;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -34,6 +40,18 @@ namespace fbLudoWebFinal
                         DropDownList1.DataValueField = "Column1";
                         DropDownList1.AutoPostBack = false;
                         DropDownList1.DataBind();
+
+                        var message = Request.QueryString["m"];
+                        if (message != null)
+                        {
+                            // Abfragezeichenfolge aus der Aktion entfernen
+                            Form.Action = ResolveUrl("~/Account/Manage");
+
+                            SuccessMessage =
+                                message == "SaveDataSuccess" ? "Die persönlichen Daten wurden erfolgreich gespeichert."
+                                : String.Empty;
+                            successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
+                        }
                     }
                 }
             }

@@ -13,7 +13,17 @@ namespace fbLudoWebFinal
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            if (currentUser != null)
+            {
+                Response.Redirect("/AusleihenÜbersicht");
+            }
+            else
+            {
+                Response.Redirect("/Account/Login");
+            }
         }
     }
 }

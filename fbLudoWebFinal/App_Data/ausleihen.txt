@@ -1,4 +1,3 @@
-﻿1:aaron.zellweger@gmail.com:6:Spiel Numero Sex1:luca.grueninger@gmx.ch:1:Spiel Numero Uno
-1:luca.grueninger@gmx.ch:3:Spiel Numero Tres
-2:luca.grueninger@gmx.ch:2:Spiel Numero Dos
-3:luca.grueninger@gmx.ch:4:Spiel Numero Vier
+﻿1:luca.grueninger@gmx.ch:1:Spiel Numero Uno
+2:luca.grueninger@gmx.ch:3:Spiel Numero Tres
+3:luca.grueninger@gmx.ch:2:Spiel Numero Dos

@@ -38,7 +38,7 @@ namespace fbLudoWebFinal.Account
                 {
                     case SignInStatus.Success:
                         //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                        Response.Redirect("/AusleihenÜbersicht");
+                        Response.Redirect("/Account/Manage");
                         break;
                     case SignInStatus.LockedOut:
                         Response.Redirect("/Account/Lockout");

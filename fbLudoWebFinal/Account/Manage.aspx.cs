@@ -152,7 +152,7 @@ namespace fbLudoWebFinal.Account
                 user.FirstLogin = true;
                 context.SaveChanges();
 
-                Response.Redirect("/AusleihenÜbersicht?m=SaveDataSuccess");
+                Response.Redirect("/NeueAusleihe?m=SaveDataSuccess");
             }
         }
     }

@@ -1,6 +1,0 @@
-1;Roll for it!;1
-2;Splendor;1
-3;Qwixx;1
-4;King of Tokyo;1
-5;Honshu;1
-6;Ji-Yeong;1

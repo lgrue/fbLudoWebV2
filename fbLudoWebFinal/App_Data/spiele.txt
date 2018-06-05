@@ -1,4 +1,4 @@
-1;Roll for it!;1
+1;Roll for it!;0
 2;Splendor;1
 3;Qwixx;1
 4;King of Tokyo;1

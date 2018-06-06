@@ -86,8 +86,6 @@ namespace fbLudoWebFinal
                                                         button.Enabled = false;
                                                         button.Attributes.CssStyle[HtmlTextWriterStyle.Color] = "gray";
                                                         button.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
-                                                        button.Attributes.CssStyle[HtmlTextWriterStyle.Color] = "gray";
-                                                        button.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
                                                     }
                                                     cell.Controls.Add(button);
                                                 }

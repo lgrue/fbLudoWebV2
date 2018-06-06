@@ -96,7 +96,7 @@ namespace fbLudoWebFinal
                 }
                 
             }
-            Server.Transfer("AusleihenÜbersicht.aspx", true);
+            Response.Redirect("/AusleihenÜbersicht");
         }
 
         public DataTable ConvertToDataTable(string filePath, int numberOfColumns)

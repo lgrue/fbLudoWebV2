@@ -1,0 +1,4 @@
+use fbLudoDB;
+insert into Ausleihe(PersonenID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values('0edb29ba-f57c-4869-844e-2a1c6c7e3a3c', 1, 'Roll for it!', convert(datetime,'05.06.18',4), convert(datetime,'12.06.18',4), 0);
+insert into Ausleihe(PersonenID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values('5fdc3c86-6790-409a-aa8b-1983f174d3c4', 2, 'Splendor', convert(datetime,'06.06.18',4), convert(datetime,'06.06.18',4), 1);
+insert into Ausleihe(PersonenID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values('5fdc3c86-6790-409a-aa8b-1983f174d3c4', 3, 'Qwixx', convert(datetime,'06.06.18',4), convert(datetime,'06.06.18',4), 3);

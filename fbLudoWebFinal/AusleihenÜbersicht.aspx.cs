@@ -12,13 +12,18 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Model;
 
 namespace fbLudoWebFinal
 {
     public partial class AusleihenÜbersicht : Page
     {
+
+        private Model.fbLudoDBEntities _context;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var currentUser = manager.FindById(User.Identity.GetUserId());
 
@@ -235,31 +240,8 @@ namespace fbLudoWebFinal
 
         private void LoadData(String userId)
         {
-            //Eine Verbindung zur Datenbank aufbauen
-            //Connection Sting für Northwind-DB ist in web.config definiert
-            string verbindungsStr = ConfigurationManager.ConnectionStrings["DataConnection"].ConnectionString;
-            SqlConnection verbindung = new SqlConnection(verbindungsStr);
-            verbindung.Open();
-
-            //User holen
-
-            //Den Sql Befehl definieren
-            string sqlanweisung = "SELECT * FROM Ausleihe where PersonenID = " + userId;
-            SqlCommand sqlbefehl = new SqlCommand(sqlanweisung, verbindung);
-
-            //Ein DataSet Objekt instantiieren
-            DataSet meinDataSet = new DataSet();
-
-            //Nun noch einen SqlDataAdapter hinzufügen
-            SqlDataAdapter meinAdapter = new SqlDataAdapter(sqlbefehl);
-            meinAdapter.Fill(meinDataSet);
-
-            //Das DataSet mit dem GridView-Objekt verbinden
-            tblAusleihenAktiv.DataSource = meinDataSet;
-            tblAusleihenAktiv.DataBind();
-
-            //Die Datenbankverbindung wieder schließen
-            verbindung.Close();
+            _context = new fbLudoDBEntities();
+            var list = _context.Ausleihe.ToList();
         }
     }
 }

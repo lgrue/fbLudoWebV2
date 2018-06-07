@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="fbLudoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ausleihe">
+          <Key>
+            <PropertyRef Name="Ausleihe_ID" />
+          </Key>
+          <Property Name="Ausleihe_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonenID" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Spiel_ID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DatumVon" Type="date" Nullable="false" />
+          <Property Name="DatumBis" Type="date" Nullable="false" />
+          <Property Name="AnzVerlaengerungen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Spiel">
+          <Key>
+            <PropertyRef Name="Spiel_ID" />
+          </Key>
+          <Property Name="Spiel_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ausgeliehen" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Ausleihe__Spiel___398D8EEE">
+          <End Role="Spiel" Type="Self.Spiel" Multiplicity="0..1" />
+          <End Role="Ausleihe" Type="Self.Ausleihe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spiel">
+              <PropertyRef Name="Spiel_ID" />
+            </Principal>
+            <Dependent Role="Ausleihe">
+              <PropertyRef Name="Spiel_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="fbLudoDBModelStoreContainer">
+          <EntitySet Name="Ausleihe" EntityType="Self.Ausleihe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spiel" EntityType="Self.Spiel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Ausleihe__Spiel___398D8EEE" Association="Self.FK__Ausleihe__Spiel___398D8EEE">
+            <End Role="Spiel" EntitySet="Spiel" />
+            <End Role="Ausleihe" EntitySet="Ausleihe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="fbLudoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ausleihe">
+          <Key>
+            <PropertyRef Name="Ausleihe_ID" />
+          </Key>
+          <Property Name="Ausleihe_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonenID" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Spiel_ID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatumVon" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatumBis" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AnzVerlaengerungen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Spiel" Relationship="Self.FK__Ausleihe__Spiel___398D8EEE" FromRole="Ausleihe" ToRole="Spiel" />
+        </EntityType>
+        <EntityType Name="Spiel">
+          <Key>
+            <PropertyRef Name="Spiel_ID" />
+          </Key>
+          <Property Name="Spiel_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ausgeliehen" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ausleihe" Relationship="Self.FK__Ausleihe__Spiel___398D8EEE" FromRole="Spiel" ToRole="Ausleihe" />
+        </EntityType>
+        <Association Name="FK__Ausleihe__Spiel___398D8EEE">
+          <End Role="Spiel" Type="Self.Spiel" Multiplicity="0..1" />
+          <End Role="Ausleihe" Type="Self.Ausleihe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spiel">
+              <PropertyRef Name="Spiel_ID" />
+            </Principal>
+            <Dependent Role="Ausleihe">
+              <PropertyRef Name="Spiel_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="fbLudoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ausleihe" EntityType="Self.Ausleihe" />
+          <EntitySet Name="Spiel" EntityType="Self.Spiel" />
+          <AssociationSet Name="FK__Ausleihe__Spiel___398D8EEE" Association="Self.FK__Ausleihe__Spiel___398D8EEE">
+            <End Role="Spiel" EntitySet="Spiel" />
+            <End Role="Ausleihe" EntitySet="Ausleihe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="fbLudoDBModelStoreContainer" CdmEntityContainer="fbLudoDBEntities">
+          <EntitySetMapping Name="Ausleihe">
+            <EntityTypeMapping TypeName="fbLudoDBModel.Ausleihe">
+              <MappingFragment StoreEntitySet="Ausleihe">
+                <ScalarProperty Name="Ausleihe_ID" ColumnName="Ausleihe_ID" />
+                <ScalarProperty Name="PersonenID" ColumnName="PersonenID" />
+                <ScalarProperty Name="Spiel_ID" ColumnName="Spiel_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
+                <ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
+                <ScalarProperty Name="AnzVerlaengerungen" ColumnName="AnzVerlaengerungen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spiel">
+            <EntityTypeMapping TypeName="fbLudoDBModel.Spiel">
+              <MappingFragment StoreEntitySet="Spiel">
+                <ScalarProperty Name="Spiel_ID" ColumnName="Spiel_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Ausgeliehen" ColumnName="Ausgeliehen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

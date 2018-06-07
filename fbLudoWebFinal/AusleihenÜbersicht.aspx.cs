@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -154,39 +155,27 @@ namespace fbLudoWebFinal
             }
         }
 
-        private void longer(Object sender, EventArgs e)
+        public void longer(Object sender, EventArgs e)
         {
-            var id = (sender as LinkButton).ID;
-            var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
-            string[] lines = File.ReadAllLines(dataFile);
-            File.WriteAllText(dataFile, String.Empty);
-            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/ausleihen.txt"), true))
+            var id = (sender as LinkButton).CommandArgument;
+            var idInt = int.Parse(id);
+            _context = new fbLudoDBEntities();
+            var ausleihe = _context.Ausleihe.FirstOrDefault(x => x.Ausleihe_ID == idInt);
+            if (ausleihe.AnzVerlaengerungen <= 2)
             {
-                foreach (string line in lines)
-                {
-                    var cols = line.Split(';');
-                    if ("v" + cols[0] == id)
-                    {
-                        System.TimeSpan duration = new System.TimeSpan(7, 0, 0, 0);
-                        DateTime newDeadline = Convert.ToDateTime(cols[5]);
-                        newDeadline = newDeadline.Add(duration);
-                        cols[5] = newDeadline.ToString("dd/MM/yyyy");
-                        cols[6] = Int32.Parse(cols[6]) + 1 + "";
-                        var newline = cols[0] + ";" + cols[1] + ";" + cols[2] + ";" + cols[3] + ";" + cols[4] + ";" + cols[5] + ";" + cols[6];
-                        _testData.WriteLine(newline); // Write the file.var cols = line.Split(':');
-                    }
-                    else
-                    {
-                        _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
-                    }
-                }
-
+                System.TimeSpan duration = new System.TimeSpan(7, 0, 0, 0);
+                DateTime newDeadline = Convert.ToDateTime(ausleihe.DatumBis);
+                newDeadline = newDeadline.Add(duration);
+                ausleihe.DatumBis = newDeadline;
+                ausleihe.AnzVerlaengerungen = ausleihe.AnzVerlaengerungen + 1;
+                _context.Entry(ausleihe).State = EntityState.Modified;
+                _context.SaveChanges();
+                Response.Redirect(Request.RawUrl);
             }
-
-            Response.Redirect(Request.RawUrl);
+            
         }
 
-        private void back(Object sender, EventArgs e)
+        public void back(Object sender, EventArgs e)
         {
             var idSpiel = "0";
             var id = (sender as LinkButton).ID;

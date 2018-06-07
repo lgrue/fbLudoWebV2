@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
+using System.Web.Providers.Entities;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace fbLudoWebFinal
 {
@@ -26,6 +30,8 @@ namespace fbLudoWebFinal
                 }
                 else
                 {
+                    LoadData(User.Identity.GetUserId());
+                    /*
                     string[] titles = new string[] { "Spiel", "Ausgelehnt am", "Zurückbringen bis", "Verlängerungen", "Verlängern", "Zurückbringen" };
                     var hrow = new TableHeaderRow();
                     foreach (string title in titles)
@@ -132,7 +138,7 @@ namespace fbLudoWebFinal
                                 }
                             }
                         }
-                    }
+                    }*/
                 }
             }
             else
@@ -225,6 +231,35 @@ namespace fbLudoWebFinal
             }
 
             Response.Redirect(Request.RawUrl);
+        }
+
+        private void LoadData(String userId)
+        {
+            //Eine Verbindung zur Datenbank aufbauen
+            //Connection Sting für Northwind-DB ist in web.config definiert
+            string verbindungsStr = ConfigurationManager.ConnectionStrings["DataConnection"].ConnectionString;
+            SqlConnection verbindung = new SqlConnection(verbindungsStr);
+            verbindung.Open();
+
+            //User holen
+
+            //Den Sql Befehl definieren
+            string sqlanweisung = "SELECT * FROM Ausleihe where PersonenID = " + userId;
+            SqlCommand sqlbefehl = new SqlCommand(sqlanweisung, verbindung);
+
+            //Ein DataSet Objekt instantiieren
+            DataSet meinDataSet = new DataSet();
+
+            //Nun noch einen SqlDataAdapter hinzufügen
+            SqlDataAdapter meinAdapter = new SqlDataAdapter(sqlbefehl);
+            meinAdapter.Fill(meinDataSet);
+
+            //Das DataSet mit dem GridView-Objekt verbinden
+            tblAusleihenAktiv.DataSource = meinDataSet;
+            tblAusleihenAktiv.DataBind();
+
+            //Die Datenbankverbindung wieder schließen
+            verbindung.Close();
         }
     }
 }

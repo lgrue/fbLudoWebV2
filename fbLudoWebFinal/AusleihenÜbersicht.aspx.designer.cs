@@ -19,7 +19,7 @@ namespace fbLudoWebFinal {
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblAusleihenAktiv;
+        protected global::System.Web.UI.WebControls.GridView tblAusleihenAktiv;
         
         /// <summary>
         /// tblAusleihenIaktiv-Steuerelement
@@ -28,6 +28,6 @@ namespace fbLudoWebFinal {
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblAusleihenIaktiv;
+        protected global::System.Web.UI.WebControls.GridView tblAusleihenIaktiv;
     }
 }

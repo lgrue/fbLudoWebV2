@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspWebPage3", "..\AspDB1\As
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspWebPage4", "..\AspDB1\AspWebPage4\AspWebPage4.csproj", "{D7B2F38D-4466-4D27-B80B-D06669B820D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{437CE3E5-FFA5-43A2-B0FB-14B7712BB43A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D7B2F38D-4466-4D27-B80B-D06669B820D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B2F38D-4466-4D27-B80B-D06669B820D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7B2F38D-4466-4D27-B80B-D06669B820D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437CE3E5-FFA5-43A2-B0FB-14B7712BB43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437CE3E5-FFA5-43A2-B0FB-14B7712BB43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437CE3E5-FFA5-43A2-B0FB-14B7712BB43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437CE3E5-FFA5-43A2-B0FB-14B7712BB43A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

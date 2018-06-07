@@ -49,10 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ausleihe.cs">
+      <DependentUpon>LudothekModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LudothekModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LudothekModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LudothekModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LudothekModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LudothekModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,6 +68,9 @@
       <DependentUpon>LudothekModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spiel.cs">
+      <DependentUpon>LudothekModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -76,6 +87,12 @@
     <Content Include="LudothekModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LudothekModel.Context.cs</LastGenOutput>
+      <DependentUpon>LudothekModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="LudothekModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LudothekModel.edmx</DependentUpon>
+      <LastGenOutput>LudothekModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 1;Roll for it!;0
-2;Splendor;1
+2;Splendor;0
 3;Qwixx;1
 4;King of Tokyo;1
 5;Honshu;1

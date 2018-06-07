@@ -30,3 +30,5 @@ fbLudoWebFinal/App_Data/aspnet-fbLudoWebFinal-20171227013059_log\.ldf
 fbLudoWebFinal/App_Data/aspnet-fbLudoWebFinal-20171227013059\.mdf
 
 \.vs/fbLudoWebFinal/v15/Server/sqlite3/storage\.ide
+
+*.cache

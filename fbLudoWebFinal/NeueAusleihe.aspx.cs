@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,8 @@ namespace fbLudoWebFinal
 {
     public partial class NeueAusleihe : Page
     {
+        private Model.fbLudoDBEntities _context;
+
         protected string SuccessMessage
         {
             get;
@@ -34,12 +38,22 @@ namespace fbLudoWebFinal
                 {
                     if (!Page.IsPostBack)
                     {
-                        DataTable dataTable = ConvertToDataTable("~/App_Data/spiele.txt", 2);
+                        var userId = User.Identity.GetUserId();
+                        _context = new fbLudoDBEntities();
+                        IEnumerable<Spiel> list = _context.Spiel.Where(x => x.Ausgeliehen == false).ToList();
+
+                        DropDownList1.DataSource = list;
+                        DropDownList1.DataTextField = "Name";
+                        DropDownList1.DataValueField = "Spiel_ID";
+                        DropDownList1.AutoPostBack = false;
+                        DropDownList1.DataBind();
+                        
+                        /*DataTable dataTable = ConvertToDataTable("~/App_Data/spiele.txt", 2);
                         DropDownList1.DataSource = dataTable;
                         DropDownList1.DataTextField = "Column2";
                         DropDownList1.DataValueField = "Column1";
                         DropDownList1.AutoPostBack = false;
-                        DropDownList1.DataBind();
+                        DropDownList1.DataBind();*/
 
                         var message = Request.QueryString["m"];
                         if (message != null)
@@ -63,15 +77,37 @@ namespace fbLudoWebFinal
 
         public void ausleihen(Object sender, EventArgs e)
         {
-            var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
+            /*var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
             string[] lines = File.ReadAllLines(dataFile);
-            var id = lines.Count();
+            var id = lines.Count();*/
+
             var userid = Context.User.Identity.GetUserId();
             DateTime currentTime = DateTime.Now;
             System.TimeSpan duration = new System.TimeSpan(7,0,0,0);
             DateTime deadline = currentTime.Add(duration);
             var counter = 0;
-            var txt = id.ToString() + ";" + userid + ";" + DropDownList1.SelectedValue + ";" + DropDownList1.SelectedItem + ";" + currentTime + ";" + deadline + ";" + counter ;
+            var spielid = int.Parse(DropDownList1.SelectedValue);
+            Ausleihe ausleihe = new Ausleihe()
+            {
+                PersonenID = userid,
+                Spiel_ID = spielid,
+                Name = Convert.ToString(DropDownList1.SelectedItem),
+                DatumVon = currentTime,
+                DatumBis = deadline,
+                AnzVerlaengerungen = counter
+            };
+            _context = new fbLudoDBEntities();
+            _context.Ausleihe.Add(ausleihe);
+            _context.SaveChanges();
+
+            
+
+            var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == spielid);
+            spiel.Ausgeliehen = true;
+            _context.Entry(spiel).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            /*var txt = id.ToString() + ";" + userid + ";" + DropDownList1.SelectedValue + ";" + DropDownList1.SelectedItem + ";" + currentTime + ";" + deadline + ";" + counter ;
             using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/ausleihen.txt"), true))
             {
                 _testData.WriteLine(txt); // Write the file.
@@ -95,7 +131,7 @@ namespace fbLudoWebFinal
                     }
                 }
                 
-            }
+            }*/
             Response.Redirect("/AusleihenÜbersicht");
         }
 

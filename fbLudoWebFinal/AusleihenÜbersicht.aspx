@@ -18,7 +18,7 @@
              <td><%#: Item.AnzVerlaengerungen %>/3</td>
              <td><%#: Item.DatumVon %></td>
              <td><%#: Item.DatumBis %></td>
-             <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Enabled="<%# !(Item.AnzVerlaengerungen == 3) %>" Text="Verlängern"></asp:LinkButton></td>
+             <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Visible="<%# !(Item.AnzVerlaengerungen == 3) %>" Text="Verlängern"></asp:LinkButton></td>
              <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="back" CommandName="back" Text="Zurückgeben"></asp:LinkButton></td>
          </tr>
        </ItemTemplate>

@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
-    <h3>Ausgeliehene Spiele</h3>
+    <h3>Aktive Ausleihen</h3>
     <asp:ListView runat="server" ID="EmployeesListView" ItemType="Model.Ausleihe">
       <LayoutTemplate>
         <table cellpadding="2" runat="server" id="tblEmployees" class="table table-striped table-dark">
@@ -19,11 +19,32 @@
              <td><%#: Item.DatumVon %></td>
              <td><%#: Item.DatumBis %></td>
              <% if(Item.AnzVerlaengerungen == 3) { %>
-                <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Text="Verlängern" Enabled="false"></asp:LinkButton></td>
-             <% }else{ %>
-                <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Text="Verlängern"></asp:LinkButton></td>
+                 <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Enabled="false" Text="Verlängern"></asp:LinkButton></td>
+             <% } %>
+             <% else { %>
+                <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Enabled="false" Text="Verlängern"></asp:LinkButton></td>
              <% } %>
              <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="back" CommandName="back" Text="Zurückgeben"></asp:LinkButton></td>
+         </tr>
+       </ItemTemplate>
+    </asp:ListView>
+
+    <h3>Inaktive Ausleihen</h3>
+    <asp:ListView runat="server" ID="ListView2" ItemType="Model.Ausleihe">
+      <LayoutTemplate>
+        <table cellpadding="2" runat="server" id="tblEmployees2" class="table table-striped table-dark">
+          <tr runat="server" id="itemPlaceholder">
+          </tr>
+        </table>
+
+      </LayoutTemplate>
+      <ItemTemplate>
+         <tr runat="server">
+             <td><%#: Item.Ausleihe_ID %></td>
+             <td><%#: Item.Name %></td>
+             <td><%#: Item.AnzVerlaengerungen %>/3</td>
+             <td><%#: Item.DatumVon %></td>
+             <td><%#: Item.DatumBis %></td>
          </tr>
        </ItemTemplate>
     </asp:ListView>

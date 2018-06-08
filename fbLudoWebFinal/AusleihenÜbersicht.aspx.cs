@@ -177,65 +177,34 @@ namespace fbLudoWebFinal
 
         public void back(Object sender, EventArgs e)
         {
-            var idSpiel = "0";
-            var id = (sender as LinkButton).ID;
-            var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
-            string[] lines = File.ReadAllLines(dataFile);
-            File.WriteAllText(dataFile, String.Empty);
-            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/ausleihen.txt"), true))
-            {
-                foreach (string line in lines)
-                {
-                    var cols = line.Split(';');
-                    if ("z" + cols[0] == id)
-                    {
-                        idSpiel = cols[2];
-                        DateTime newDeadline = DateTime.Now;
-                        cols[5] = newDeadline.ToString("dd/MM/yyyy");
-                        var newline = cols[0] + ";" + cols[1] + ";" + cols[2] + ";" + cols[3] + ";" + cols[4] + ";" + cols[5] + ";" + cols[6];
-                        _testData.WriteLine(newline); // Write the file.var cols = line.Split(':');
-                    }
-                    else
-                    {
-                        _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
-                    }
-                }
-
-            }
-
-
-            dataFile = Server.MapPath("~/App_Data/spiele.txt");
-            lines = File.ReadAllLines(dataFile);
-            File.WriteAllText(dataFile, String.Empty);
-            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/spiele.txt"), true))
-            {
-                foreach (string line in lines)
-                {
-                    var cols = line.Split(';');
-                    if (cols[0] == idSpiel)
-                    {
-                        cols[2] = "1";
-                        var newline = cols[0] + ";" + cols[1] + ";" + cols[2];
-                        _testData.WriteLine(newline); // Write the file.var cols = line.Split(':');
-                    }
-                    else
-                    {
-                        _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
-                    }
-                }
-
-            }
+            var id = (sender as LinkButton).CommandArgument;
+            var idInt = int.Parse(id);
+            _context = new fbLudoDBEntities();
+            var ausleihe = _context.Ausleihe.FirstOrDefault(x => x.Ausleihe_ID == idInt);
+            var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == ausleihe.Spiel_ID);
+            spiel.Ausgeliehen = false;
+            DateTime newDeadline = DateTime.Now;
+            ausleihe.DatumBis = newDeadline;
+            _context.Entry(ausleihe).State = EntityState.Modified;
+            _context.SaveChanges();
+            _context.Entry(spiel).State = EntityState.Modified;
+            _context.SaveChanges();
+            Response.Redirect(Request.RawUrl);
 
             Response.Redirect(Request.RawUrl);
         }
 
         private void LoadData(string userId)
         {
+            DateTime now = DateTime.Now;
             _context = new fbLudoDBEntities();
-            IEnumerable<Ausleihe> list = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
-
+            IEnumerable<Ausleihe> list = _context.Ausleihe.Where(x => x.PersonenID == userId && x.DatumBis > now).ToList();
             EmployeesListView.DataSource = list;
             EmployeesListView.DataBind();
+
+            IEnumerable<Ausleihe> list2 = _context.Ausleihe.Where(x => x.PersonenID == userId && x.DatumBis <= now).ToList();
+            ListView2.DataSource = list2;
+            ListView2.DataBind();
         }
     }
 }

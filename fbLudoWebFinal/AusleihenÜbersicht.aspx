@@ -10,14 +10,23 @@
           </tr>
         </table>
 
-      </LayoutTemplate>
-      <ItemTemplate>
+      </LayoutTemplate>    
+        <ItemTemplate>
+            <tr runat="server" visible='<%# (int)DataBinder.Eval(Container, "DataItemIndex") == 0 %>'>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Verlängerung</th>
+               <th>Ausleihedatum</th>
+               <th>Rückgabedatum</th>
+               <th>Verlängern</th>
+               <th>Zurückgeben</th>
+            </tr>
          <tr runat="server">
              <td><%#: Item.Ausleihe_ID %></td>
              <td><%#: Item.Name %></td>
              <td><%#: Item.AnzVerlaengerungen %>/3</td>
-             <td><%#: Item.DatumVon %></td>
-             <td><%#: Item.DatumBis %></td>
+             <td><%#: Item.DatumVon.Day + "." + Item.DatumVon.Month + "." + Item.DatumVon.Year  %></td>
+             <td><%#: Item.DatumBis.Day + "." + Item.DatumBis.Month + "." + Item.DatumBis.Year %></td>
              <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="longer" CommandName="longer" Visible="<%# !(Item.AnzVerlaengerungen == 3) %>" Text="Verlängern"></asp:LinkButton></td>
              <td><asp:LinkButton CommandArgument="<%#: Item.Ausleihe_ID %>" runat="server" OnClick="back" CommandName="back" Text="Zurückgeben"></asp:LinkButton></td>
          </tr>
@@ -34,12 +43,19 @@
 
       </LayoutTemplate>
       <ItemTemplate>
+          <tr runat="server" visible='<%# (int)DataBinder.Eval(Container, "DataItemIndex") == 0 %>'>
+             <th>ID</th>
+             <th>Name</th>
+             <th>Verlängerung</th>
+             <th>Ausleihedatum</th>
+             <th>Rückgabedatum</th>
+          </tr>
          <tr runat="server">
              <td><%#: Item.Ausleihe_ID %></td>
              <td><%#: Item.Name %></td>
              <td><%#: Item.AnzVerlaengerungen %>/3</td>
-             <td><%#: Item.DatumVon %></td>
-             <td><%#: Item.DatumBis %></td>
+             <td><%#: Item.DatumVon.Day + "." + Item.DatumVon.Month + "." + Item.DatumVon.Year %></td>
+             <td><%#: Item.DatumBis.Day + "." + Item.DatumBis.Month + "." + Item.DatumBis.Year %></td>
          </tr>
        </ItemTemplate>
     </asp:ListView>

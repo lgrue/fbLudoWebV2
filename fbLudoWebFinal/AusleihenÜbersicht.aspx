@@ -5,6 +5,7 @@
     <h3>Aktive Ausleihen</h3>
     <asp:ListView runat="server" ID="EmployeesListView" ItemType="Model.Ausleihe">
       <LayoutTemplate>
+
         <table cellpadding="2" runat="server" id="tblEmployees" class="table table-striped table-dark">
           <tr runat="server" id="itemPlaceholder">
           </tr>

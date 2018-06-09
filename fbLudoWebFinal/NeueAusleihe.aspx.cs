@@ -47,13 +47,6 @@ namespace fbLudoWebFinal
                         DropDownList1.DataValueField = "Spiel_ID";
                         DropDownList1.AutoPostBack = false;
                         DropDownList1.DataBind();
-                        
-                        /*DataTable dataTable = ConvertToDataTable("~/App_Data/spiele.txt", 2);
-                        DropDownList1.DataSource = dataTable;
-                        DropDownList1.DataTextField = "Column2";
-                        DropDownList1.DataValueField = "Column1";
-                        DropDownList1.AutoPostBack = false;
-                        DropDownList1.DataBind();*/
 
                         var message = Request.QueryString["m"];
                         if (message != null)
@@ -77,10 +70,6 @@ namespace fbLudoWebFinal
 
         public void ausleihen(Object sender, EventArgs e)
         {
-            /*var dataFile = Server.MapPath("~/App_Data/ausleihen.txt");
-            string[] lines = File.ReadAllLines(dataFile);
-            var id = lines.Count();*/
-
             var userid = Context.User.Identity.GetUserId();
             DateTime currentTime = DateTime.Now;
             System.TimeSpan duration = new System.TimeSpan(7,0,0,0);
@@ -106,32 +95,6 @@ namespace fbLudoWebFinal
             spiel.Ausgeliehen = true;
             _context.Entry(spiel).State = EntityState.Modified;
             _context.SaveChanges();
-
-            /*var txt = id.ToString() + ";" + userid + ";" + DropDownList1.SelectedValue + ";" + DropDownList1.SelectedItem + ";" + currentTime + ";" + deadline + ";" + counter ;
-            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/ausleihen.txt"), true))
-            {
-                _testData.WriteLine(txt); // Write the file.
-            }
-            dataFile = Server.MapPath("~/App_Data/spiele.txt");
-            lines = File.ReadAllLines(dataFile);
-            File.WriteAllText(dataFile, String.Empty);
-            using (StreamWriter _testData = new StreamWriter(Server.MapPath("~/App_Data/spiele.txt"), true))
-            {
-                foreach (string line in lines)
-                {
-                    var cols = line.Split(';');
-                    if (cols[0] == DropDownList1.SelectedValue) {
-                        cols[2] = "0";
-                        var newline = cols[0] + ";" + cols[1] + ";" + cols[2];
-                        _testData.WriteLine(newline); // Write the file.var cols = line.Split(':');
-                    }
-                    else
-                    {
-                        _testData.WriteLine(line); // Write the file.var cols = line.Split(':');
-                    }
-                }
-                
-            }*/
             Response.Redirect("/AusleihenÜbersicht");
         }
 

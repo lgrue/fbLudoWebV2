@@ -14,14 +14,16 @@ namespace Model
     
     public partial class Ausleihe
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Ausleihe()
+        {
+            this.Ausleihe_Spiel = new HashSet<Ausleihe_Spiel>();
+        }
+    
         public int Ausleihe_ID { get; set; }
         public string PersonenID { get; set; }
-        public Nullable<int> Spiel_ID { get; set; }
-        public string Name { get; set; }
-        public System.DateTime DatumVon { get; set; }
-        public System.DateTime DatumBis { get; set; }
-        public int AnzVerlaengerungen { get; set; }
     
-        public virtual Spiel Spiel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ausleihe_Spiel> Ausleihe_Spiel { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Spiel()
         {
-            this.Ausleihe = new HashSet<Ausleihe>();
+            this.Ausleihe_Spiel = new HashSet<Ausleihe_Spiel>();
         }
     
         public int Spiel_ID { get; set; }
@@ -25,6 +25,6 @@ namespace Model
         public bool Ausgeliehen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ausleihe> Ausleihe { get; set; }
+        public virtual ICollection<Ausleihe_Spiel> Ausleihe_Spiel { get; set; }
     }
 }

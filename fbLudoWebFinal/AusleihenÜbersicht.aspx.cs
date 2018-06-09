@@ -90,7 +90,13 @@ namespace fbLudoWebFinal
         {
             DateTime now = DateTime.Now;
             _context = new fbLudoDBEntities();
-            IEnumerable<Ausleihe> list = _context.Ausleihe.Where(x => x.PersonenID == userId && x.DatumBis > now).ToList();
+            //get all ausleihe ids
+            var listAusleiheID = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
+            
+            foreach (Ausleihe ausleiheid in listAusleiheID) {
+                var id = ausleiheid.Ausleihe_ID;
+                IEnumerable<Ausleihe_Spiel> list = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis > now).ToList();
+            }
             EmployeesListView.DataSource = list;
             EmployeesListView.DataBind();
 

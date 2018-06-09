@@ -78,9 +78,12 @@ namespace fbLudoWebFinal
             var spielid = int.Parse(DropDownList1.SelectedValue);
             Ausleihe ausleihe = new Ausleihe()
             {
-                PersonenID = userid,
+                PersonenID = userid
+            };
+            Ausleihe_Spiel ausleihe_spiel = new Ausleihe_Spiel()
+            {
+                Ausleihe_ID = ausleihe.Ausleihe_ID,
                 Spiel_ID = spielid,
-                Name = Convert.ToString(DropDownList1.SelectedItem),
                 DatumVon = currentTime,
                 DatumBis = deadline,
                 AnzVerlaengerungen = counter
@@ -98,7 +101,7 @@ namespace fbLudoWebFinal
             Response.Redirect("/AusleihenÜbersicht");
         }
 
-        public DataTable ConvertToDataTable(string filePath, int numberOfColumns)
+        /*public DataTable ConvertToDataTable(string filePath, int numberOfColumns)
         {
             DataTable tbl = new DataTable();
 
@@ -124,6 +127,6 @@ namespace fbLudoWebFinal
             }
 
             return tbl;
-        }
+        }*/
     }
 }

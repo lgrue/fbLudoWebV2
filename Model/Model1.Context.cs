@@ -10,14 +10,13 @@
 namespace Model
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class fbLudoDBEntities : DbContext
+    
+    public partial class fbLudoDBEntities1 : DbContext
     {
-        public fbLudoDBEntities()
-            : base("name=fbLudoDBEntities")
+        public fbLudoDBEntities1()
+            : base("name=fbLudoDBEntities1")
         {
         }
     
@@ -27,7 +26,7 @@ namespace Model
         }
     
         public virtual DbSet<Ausleihe> Ausleihe { get; set; }
-        public virtual DbSet<Spiel> Spiel { get; set; }
         public virtual DbSet<Ausleihe_Spiel> Ausleihe_Spiel { get; set; }
+        public virtual DbSet<Spiel> Spiel { get; set; }
     }
 }

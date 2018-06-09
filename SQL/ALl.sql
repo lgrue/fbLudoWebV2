@@ -20,6 +20,12 @@ create table Ausleihe_Spiel(
 	AnzVerlaengerungen int not null
 );
 
+create table Code(
+	Code_ID int primary key IDENTITY(1,1) not null,
+	Code nvarchar(20) not null,
+	Aktiv bit not null,
+);
+
 insert into Spiel(Name, Ausgeliehen) values('Roll for it!', 0);
 insert into Spiel(Name, Ausgeliehen) values('Splendor', 0);
 insert into Spiel(Name, Ausgeliehen) values('Qwixx', 0);

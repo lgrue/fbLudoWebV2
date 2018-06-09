@@ -69,52 +69,7 @@ namespace fbLudoWebFinal
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            SiteMapDataSource siteMap;
 
-            if(HttpContext.Current.User.IsInRole("Kunde"))
-            {
-                siteMap = GetSiteMapDataSource("~/KundenStartseite");
-                CreateMenuControl(siteMap);
-            }
-            else if (HttpContext.Current.User.IsInRole("Mitarbeiter"))
-            {
-                siteMap = GetSiteMapDataSource("~/MitarbeiterStartseite");
-                CreateMenuControl(siteMap);
-            }
-            else if (HttpContext.Current.User.IsInRole("Admin"))
-            {
-                siteMap = GetSiteMapDataSource("~/AdminStartseite");
-                CreateMenuControl(siteMap);
-            }
-            else
-            {
-                siteMap = GetSiteMapDataSource("~/Employee.aspx");
-            }
-            
-            CreateMenuControl(siteMap);
-
-        }
-
-        private void CreateMenuControl(SiteMapDataSource siteMapDataSource)
-        {
-            Menu1.DataSource = siteMapDataSource;
-            Menu1.DataBind();
-        }
-
-        private SiteMapDataSource GetSiteMapDataSource(string startingNodeUrl)
-        {
-            XmlSiteMapProvider xmlSiteMap = new XmlSiteMapProvider();
-            System.Collections.Specialized.NameValueCollection
-                   myCollection = new
-                   System.Collections.Specialized.NameValueCollection(1);
-            myCollection.Add("siteMapFile", "Web.sitemap");
-            xmlSiteMap.Initialize("provider", myCollection);
-            xmlSiteMap.BuildSiteMap();
-            SiteMapDataSource siteMap = new SiteMapDataSource();
-            siteMap.StartingNodeUrl = startingNodeUrl;
-            siteMap.ShowStartingNode = false;
-            return siteMap;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

@@ -39,9 +39,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <asp:Menu ID="Menu1" runat="server"></asp:Menu>
-
-        <%-- <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,6 +53,16 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/NeueAusleihe">Neue Ausleihe</a></li>
                         <li><a runat="server" href="~/AusleihenÜbersicht">Ausleihen Übersicht</a></li>
+                        <% if (HttpContext.Current.User.IsInRole("Kunde")) { %>
+                            <li><a runat="server" href="~/MitglidschaftRollen">Mitglidschaft Rollen</a></li>
+                        <% } %>
+                        <% if (HttpContext.Current.User.IsInRole("Mitarbeiter") || HttpContext.Current.User.IsInRole("Admin")) { %>
+                            <li><a runat="server" href="~/NeueSpiele">Neue Spiele</a></li>
+                        <% } %>
+                        <% if (HttpContext.Current.User.IsInRole("Admin")) { %>
+                            <li><a runat="server" href="~/ApplikationsEinstellungen">Applikations Einstellungen</a></li>
+                            <li><a runat="server" href="~/PreiseAnpassen">Preise Anpassen</a></li>
+                        <% } %>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
@@ -74,7 +82,7 @@
                     </asp:LoginView>
                 </div>
             </div> 
-        </div> --%>
+        </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

@@ -31,6 +31,15 @@ namespace fbLudoWebFinal {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
+        /// CheckListSpiele-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckListSpiele;
+        
+        /// <summary>
         /// btnAusleihe-Steuerelement
         /// </summary>
         /// <remarks>

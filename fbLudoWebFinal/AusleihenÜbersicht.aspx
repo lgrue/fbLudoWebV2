@@ -31,7 +31,7 @@
          </tr>
        </ItemTemplate>
     </asp:ListView>
-
+    
     <h3>Inaktive Ausleihen</h3>
     <asp:ListView runat="server" ID="ListView2" ItemType="Model.Ausleihe_Spiel">
       <LayoutTemplate>

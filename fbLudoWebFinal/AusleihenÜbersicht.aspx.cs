@@ -77,7 +77,6 @@ namespace fbLudoWebFinal
             DateTime newDeadline = DateTime.Now;
             ausleihe.DatumBis = newDeadline;
             _context.Entry(ausleihe).State = EntityState.Modified;
-            //_context.SaveChanges();
             _context.Entry(spiel).State = EntityState.Modified;
             _context.SaveChanges();
             Response.Redirect(Request.RawUrl);
@@ -90,7 +89,6 @@ namespace fbLudoWebFinal
             IEnumerable<Ausleihe> listAusleihen;
             IEnumerable<Ausleihe_Spiel> list = Enumerable.Empty<Ausleihe_Spiel>();
             
-            //get all ausleihe ids
             listAusleihen = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
 
             foreach (Ausleihe ausleiheid in listAusleihen) {
@@ -108,7 +106,7 @@ namespace fbLudoWebFinal
 
             IEnumerable<Ausleihe> listAusleihenInactive;
             IEnumerable<Ausleihe_Spiel> listInactive = Enumerable.Empty<Ausleihe_Spiel>();
-            //get all ausleihe ids
+            
             listAusleihenInactive = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
 
             foreach (Ausleihe ausleiheid in listAusleihenInactive)

@@ -10,7 +10,9 @@
         </asp:PlaceHolder>
     </div>
 
-    <p>Wählen Sie das Spiel aus, welches Sie ausleihen möchten.</p>
-    <asp:DropDownList id="DropDownList1" runat="server"></asp:DropDownList>
+    <p>Wählen Sie die Spiele aus, die Sie ausleihen möchten.</p>
+    <p>Es können bis zu <b>3 Spiele</b> ausgelehnt werden.</p>
+    <!-- <asp:DropDownList id="DropDownList1" runat="server"></asp:DropDownList> -->
+    <asp:CheckBoxList id="CheckListSpiele" runat="server"></asp:CheckBoxList>
     <asp:Button runat="server" ID="btnAusleihe" Text="Ausleihe" OnClick="ausleihen" />
 </asp:Content>

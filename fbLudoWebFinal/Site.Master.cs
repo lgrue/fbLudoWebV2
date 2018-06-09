@@ -69,25 +69,48 @@ namespace fbLudoWebFinal
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            switch (Context.User.Identity.GetUserName())
+            
+            SiteMapDataSource siteMap;
+
+            if(HttpContext.Current.User.IsInRole("Kunde"))
             {
-                case "kunde@fbWebLudo.com":
-                    SiteMapDataSource1.StartingNodeUrl = "~/Employee.aspx";
-                    SiteMapDataSource1.StartingNodeOffset = -1;
-                    break;
-                case "mitarbeiter@fbWebLudo.com":
-                    SiteMapDataSource1.StartingNodeUrl = "~/Employer.aspx";
-                    SiteMapDataSource1.StartingNodeOffset = -1;
-                    break;
-                case "admin@fbWebLudo.com":
-                    SiteMapDataSource1.StartingNodeUrl = "~/admin.aspx";
-                    SiteMapDataSource1.StartingNodeOffset = -1;
-                    break;
-                default:
-                    SiteMapDataSource1.StartingNodeUrl = "~/Employee.aspx";
-                    SiteMapDataSource1.StartingNodeOffset = -1;
-                    break;
+                siteMap = GetSiteMapDataSource("~/Employee.aspx");
             }
+            else if (HttpContext.Current.User.IsInRole("Mitarbeiter"))
+            {
+                siteMap = GetSiteMapDataSource("~/Employer.aspx");
+            }
+            else if (HttpContext.Current.User.IsInRole("Admin"))
+            {
+                siteMap = GetSiteMapDataSource("~/admin.aspx");
+            }
+            else
+            {
+                siteMap = GetSiteMapDataSource("~/Employee.aspx");
+            }
+            
+            CreateMenuControl(siteMap);
+
+        }
+
+        private void CreateMenuControl(SiteMapDataSource siteMapDataSource)
+        {
+            Menu1.DataSource = siteMapDataSource;
+            Menu1.DataBind();
+        }
+
+        private SiteMapDataSource GetSiteMapDataSource(string startingNodeUrl)
+        {
+            XmlSiteMapProvider xmlSiteMap = new XmlSiteMapProvider();
+            System.Collections.Specialized.NameValueCollection
+                   myCollection = new
+                   System.Collections.Specialized.NameValueCollection(1);
+            myCollection.Add("siteMapFile", "Web.sitemap");
+            xmlSiteMap.Initialize("provider", myCollection);
+            xmlSiteMap.BuildSiteMap();
+            SiteMapDataSource siteMap = new SiteMapDataSource();
+            siteMap.StartingNodeUrl = startingNodeUrl;
+            return siteMap;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

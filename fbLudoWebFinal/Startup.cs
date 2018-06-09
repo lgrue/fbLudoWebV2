@@ -58,20 +58,66 @@ namespace fbLudoWebFinal
             }
 
             // creating Creating Manager role    
-            if (!roleManager.RoleExists("Manager"))
+            if (!roleManager.RoleExists("Kunde"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Manager";
+                role.Name = "Kunde";
                 roleManager.Create(role);
+
+                //Here we create a Admin super user who will maintain the website                  
+
+                var user = new ApplicationUser();
+                user.Anrede = "Herr";
+                user.Vorname = "admin";
+                user.Nachname = "fbWebLudo";
+                user.UserName = "kunde@fbWebLudo.com";
+                user.Email = "kunde@fbWebLudo.com";
+                user.PLZ = 9444;
+                user.Ort = "Diepoldsau";
+                user.Adresse = "Kamorstrasse 10a";
+                user.FirstLogin = false;
+                string userPWD = "Test1234!";
+
+                var chkUser = UserManager.Create(user, userPWD);
+
+                //Add default User to Role Admin   
+                if (chkUser.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "Kunde");
+
+                }
 
             }
 
             // creating Creating Employee role    
-            if (!roleManager.RoleExists("Employee"))
+            if (!roleManager.RoleExists("Mitarbeiter"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employee";
+                role.Name = "Mitarbeiter";
                 roleManager.Create(role);
+
+                //Here we create a Admin super user who will maintain the website                  
+
+                var user = new ApplicationUser();
+                user.Anrede = "Herr";
+                user.Vorname = "admin";
+                user.Nachname = "fbWebLudo";
+                user.UserName = "mitarbeiter@fbWebLudo.com";
+                user.Email = "mitarbeiter@fbWebLudo.com";
+                user.PLZ = 9444;
+                user.Ort = "Diepoldsau";
+                user.Adresse = "Kamorstrasse 10a";
+                user.FirstLogin = false;
+                string userPWD = "Test1234!";
+
+                var chkUser = UserManager.Create(user, userPWD);
+
+                //Add default User to Role Admin   
+                if (chkUser.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "Mitarbeiter");
+
+                }
 
             }
         }

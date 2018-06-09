@@ -39,8 +39,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
-        <asp:Menu ID="Menu1" DataSourceID="SiteMapDataSource1" runat="server"></asp:Menu>
+        <asp:Menu ID="Menu1" runat="server"></asp:Menu>
 
         <%-- <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">

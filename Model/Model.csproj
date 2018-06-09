@@ -50,10 +50,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ausleihe.cs">
-      <DependentUpon>fbLudoModel.tt</DependentUpon>
+      <DependentUpon>fbLudoDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Ausleihe_Spiel.cs">
-      <DependentUpon>fbLudoModel.tt</DependentUpon>
+      <DependentUpon>fbLudoDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Code.cs">
+      <DependentUpon>fbLudoDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fbLudoDBEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fbLudoDBEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fbLudoDBEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>fbLudoDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LudothekModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LudothekModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="fbLudoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -72,7 +90,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spiel.cs">
-      <DependentUpon>fbLudoModel.tt</DependentUpon>
+      <DependentUpon>fbLudoDBEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -81,12 +99,29 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>fbLudoModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="LudothekModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LudothekModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="LudothekModel.edmx.diagram">
+      <DependentUpon>LudothekModel.edmx</DependentUpon>
+    </None>
     <None Include="fbLudoModel.edmx.diagram">
       <DependentUpon>fbLudoModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fbLudoDBEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LudothekModel.edmx</DependentUpon>
+      <LastGenOutput>fbLudoDBEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="fbLudoDBEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LudothekModel.edmx</DependentUpon>
+      <LastGenOutput>fbLudoDBEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="fbLudoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>fbLudoModel.edmx</DependentUpon>

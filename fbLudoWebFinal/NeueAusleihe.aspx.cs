@@ -15,7 +15,7 @@ namespace fbLudoWebFinal
 {
     public partial class NeueAusleihe : Page
     {
-        private Model.fbLudoDBEntities2 _context;
+        private Model.fbLudoDBEntities3 _context;
         //private Model.fbLudoDBEntities _context;
 
         protected string SuccessMessage
@@ -40,7 +40,7 @@ namespace fbLudoWebFinal
                     if (!Page.IsPostBack)
                     {
                         var userId = User.Identity.GetUserId();
-                        _context = new fbLudoDBEntities2();
+                        _context = new fbLudoDBEntities3();
                         IEnumerable<Spiel> list = _context.Spiel.Where(x => x.Ausgeliehen == false).ToList();
 
                         DropDownList1.DataSource = list;
@@ -77,6 +77,7 @@ namespace fbLudoWebFinal
             DateTime deadline = currentTime.Add(duration);
             var counter = 0;
             var spielid = int.Parse(DropDownList1.SelectedValue);
+            var spielname = Convert.ToString(DropDownList1.SelectedItem);
             Ausleihe ausleihe = new Ausleihe()
             {
                 PersonenID = userid
@@ -85,12 +86,14 @@ namespace fbLudoWebFinal
             {
                 Ausleihe_ID = ausleihe.Ausleihe_ID,
                 Spiel_ID = spielid,
+                Name = spielname,
                 DatumVon = currentTime,
                 DatumBis = deadline,
                 AnzVerlaengerungen = counter
             };
-            _context = new fbLudoDBEntities2();
+            _context = new fbLudoDBEntities3();
             _context.Ausleihe.Add(ausleihe);
+            _context.Ausleihe_Spiel.Add(ausleihe_spiel);
             _context.SaveChanges();
 
             

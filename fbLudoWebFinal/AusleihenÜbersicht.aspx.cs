@@ -21,7 +21,7 @@ namespace fbLudoWebFinal
     public partial class AusleihenÜbersicht : Page
     {
 
-        private Model.fbLudoDBEntities2 _context;
+        private Model.fbLudoDBEntities3 _context;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -49,10 +49,10 @@ namespace fbLudoWebFinal
 
         public void longer(Object sender, EventArgs e)
         {
-            /*var id = (sender as LinkButton).CommandArgument;
+            var id = (sender as LinkButton).CommandArgument;
             var idInt = int.Parse(id);
-            _context = new fbLudoDBEntities2();
-            var ausleihe = _context.Ausleihe.FirstOrDefault(x => x.Ausleihe_ID == idInt);
+            _context = new fbLudoDBEntities3();
+            var ausleihe = _context.Ausleihe_Spiel.FirstOrDefault(x => x.Ausleihe_ID == idInt);
             if (ausleihe.AnzVerlaengerungen <= 2)
             {
                 System.TimeSpan duration = new System.TimeSpan(7, 0, 0, 0);
@@ -63,41 +63,45 @@ namespace fbLudoWebFinal
                 _context.Entry(ausleihe).State = EntityState.Modified;
                 _context.SaveChanges();
                 Response.Redirect(Request.RawUrl);
-            }*/
+            }
         }
 
         public void back(Object sender, EventArgs e)
         {
-            /*var id = (sender as LinkButton).CommandArgument;
+            var id = (sender as LinkButton).CommandArgument;
             var idInt = int.Parse(id);
-            _context = new fbLudoDBEntities2();
-            var ausleihe = _context.Ausleihe.FirstOrDefault(x => x.Ausleihe_ID == idInt);
+            _context = new fbLudoDBEntities3();
+            var ausleihe = _context.Ausleihe_Spiel.FirstOrDefault(x => x.Ausleihe_ID == idInt);
             var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == ausleihe.Spiel_ID);
             spiel.Ausgeliehen = false;
             DateTime newDeadline = DateTime.Now;
             ausleihe.DatumBis = newDeadline;
             _context.Entry(ausleihe).State = EntityState.Modified;
-            _context.SaveChanges();
+            //_context.SaveChanges();
             _context.Entry(spiel).State = EntityState.Modified;
             _context.SaveChanges();
             Response.Redirect(Request.RawUrl);
-
-            Response.Redirect(Request.RawUrl);*/
         }
 
         private void LoadData(string userId)
         {
             DateTime now = DateTime.Now;
-            _context = new fbLudoDBEntities2();
+            _context = new fbLudoDBEntities3();
             IEnumerable<Ausleihe> listAusleihen;
             IEnumerable<Ausleihe_Spiel> list = Enumerable.Empty<Ausleihe_Spiel>();
+            
             //get all ausleihe ids
             listAusleihen = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
-            
+
             foreach (Ausleihe ausleiheid in listAusleihen) {
                 var id = ausleiheid.Ausleihe_ID;
-                list = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis > now).ToList();
+
+                if (list == null)
+                    list = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis > now).ToList();
+                else
+                    list = list.Concat(_context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis > now).ToList());
             }
+            
             EmployeesListView.DataSource = list;
             EmployeesListView.DataBind();
 
@@ -110,7 +114,11 @@ namespace fbLudoWebFinal
             foreach (Ausleihe ausleiheid in listAusleihenInactive)
             {
                 var id = ausleiheid.Ausleihe_ID;
-                listInactive = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis <= now).ToList();
+
+                if (listInactive == null)
+                    listInactive = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis <= now).ToList();
+                else
+                    listInactive = listInactive.Concat(_context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis <= now).ToList());
             }
             ListView2.DataSource = listInactive;
             ListView2.DataBind();

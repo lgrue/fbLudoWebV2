@@ -12,18 +12,10 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Ausleihe_Spiel
+    public partial class Code
     {
-        public int Ausleihe_Spiel_ID { get; set; }
-        public Nullable<int> Ausleihe_ID { get; set; }
-        public Nullable<int> Spiel_ID { get; set; }
-        public string Name { get; set; }
-        public System.DateTime DatumVon { get; set; }
-        public System.DateTime DatumBis { get; set; }
-        public int AnzVerlaengerungen { get; set; }
-    
-        public virtual Ausleihe Ausleihe { get; set; }
-        public virtual Spiel Spiel { get; set; }
-
+        public int Code_ID { get; set; }
+        public string Code1 { get; set; }
+        public bool Aktiv { get; set; }
     }
 }

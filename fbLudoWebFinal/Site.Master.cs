@@ -75,21 +75,20 @@ namespace fbLudoWebFinal
             if(HttpContext.Current.User.IsInRole("Kunde"))
             {
                 siteMap = GetSiteMapDataSource("~/Employee.aspx");
+                CreateMenuControl(siteMap);
             }
             else if (HttpContext.Current.User.IsInRole("Mitarbeiter"))
             {
                 siteMap = GetSiteMapDataSource("~/Employer.aspx");
+                CreateMenuControl(siteMap); 
             }
             else if (HttpContext.Current.User.IsInRole("Admin"))
             {
                 siteMap = GetSiteMapDataSource("~/admin.aspx");
-            }
-            else
-            {
-                siteMap = GetSiteMapDataSource("~/Employee.aspx");
+                CreateMenuControl(siteMap);
             }
             
-            CreateMenuControl(siteMap);
+            
 
         }
 

@@ -15,7 +15,8 @@ namespace fbLudoWebFinal
 {
     public partial class NeueAusleihe : Page
     {
-        private Model.fbLudoDBEntities _context;
+        private Model.fbLudoDBEntities2 _context;
+        //private Model.fbLudoDBEntities _context;
 
         protected string SuccessMessage
         {
@@ -39,7 +40,7 @@ namespace fbLudoWebFinal
                     if (!Page.IsPostBack)
                     {
                         var userId = User.Identity.GetUserId();
-                        _context = new fbLudoDBEntities();
+                        _context = new fbLudoDBEntities2();
                         IEnumerable<Spiel> list = _context.Spiel.Where(x => x.Ausgeliehen == false).ToList();
 
                         DropDownList1.DataSource = list;
@@ -88,7 +89,7 @@ namespace fbLudoWebFinal
                 DatumBis = deadline,
                 AnzVerlaengerungen = counter
             };
-            _context = new fbLudoDBEntities();
+            _context = new fbLudoDBEntities2();
             _context.Ausleihe.Add(ausleihe);
             _context.SaveChanges();
 

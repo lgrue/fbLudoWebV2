@@ -3,14 +3,12 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
     <h3>Aktive Ausleihen</h3>
-    <asp:ListView runat="server" ID="EmployeesListView" ItemType="Model.Ausleihe">
+    <asp:ListView runat="server" ID="EmployeesListView" ItemType="Model.Ausleihe_Spiel">
       <LayoutTemplate>
-
         <table cellpadding="2" runat="server" id="tblEmployees" class="table table-striped table-dark">
           <tr runat="server" id="itemPlaceholder">
           </tr>
         </table>
-
       </LayoutTemplate>    
         <ItemTemplate>
             <tr runat="server" visible='<%# (int)DataBinder.Eval(Container, "DataItemIndex") == 0 %>'>
@@ -35,7 +33,7 @@
     </asp:ListView>
 
     <h3>Inaktive Ausleihen</h3>
-    <asp:ListView runat="server" ID="ListView2" ItemType="Model.Ausleihe">
+    <asp:ListView runat="server" ID="ListView2" ItemType="Model.Ausleihe_Spiel">
       <LayoutTemplate>
         <table cellpadding="2" runat="server" id="tblEmployees2" class="table table-striped table-dark">
           <tr runat="server" id="itemPlaceholder">

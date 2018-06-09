@@ -21,7 +21,7 @@ namespace fbLudoWebFinal
     public partial class AusleihenÜbersicht : Page
     {
 
-        private Model.fbLudoDBEntities _context;
+        private Model.fbLudoDBEntities2 _context;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -49,9 +49,9 @@ namespace fbLudoWebFinal
 
         public void longer(Object sender, EventArgs e)
         {
-            var id = (sender as LinkButton).CommandArgument;
+            /*var id = (sender as LinkButton).CommandArgument;
             var idInt = int.Parse(id);
-            _context = new fbLudoDBEntities();
+            _context = new fbLudoDBEntities2();
             var ausleihe = _context.Ausleihe.FirstOrDefault(x => x.Ausleihe_ID == idInt);
             if (ausleihe.AnzVerlaengerungen <= 2)
             {
@@ -63,15 +63,14 @@ namespace fbLudoWebFinal
                 _context.Entry(ausleihe).State = EntityState.Modified;
                 _context.SaveChanges();
                 Response.Redirect(Request.RawUrl);
-            }
-            
+            }*/
         }
 
         public void back(Object sender, EventArgs e)
         {
-            var id = (sender as LinkButton).CommandArgument;
+            /*var id = (sender as LinkButton).CommandArgument;
             var idInt = int.Parse(id);
-            _context = new fbLudoDBEntities();
+            _context = new fbLudoDBEntities2();
             var ausleihe = _context.Ausleihe.FirstOrDefault(x => x.Ausleihe_ID == idInt);
             var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == ausleihe.Spiel_ID);
             spiel.Ausgeliehen = false;
@@ -83,26 +82,44 @@ namespace fbLudoWebFinal
             _context.SaveChanges();
             Response.Redirect(Request.RawUrl);
 
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect(Request.RawUrl);*/
         }
 
         private void LoadData(string userId)
         {
             DateTime now = DateTime.Now;
-            _context = new fbLudoDBEntities();
+            _context = new fbLudoDBEntities2();
+            IEnumerable<Ausleihe> listAusleihen;
+            IEnumerable<Ausleihe_Spiel> list = Enumerable.Empty<Ausleihe_Spiel>();
             //get all ausleihe ids
-            var listAusleiheID = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
+            listAusleihen = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
             
-            foreach (Ausleihe ausleiheid in listAusleiheID) {
+            foreach (Ausleihe ausleiheid in listAusleihen) {
                 var id = ausleiheid.Ausleihe_ID;
-                IEnumerable<Ausleihe_Spiel> list = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis > now).ToList();
+                list = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis > now).ToList();
             }
             EmployeesListView.DataSource = list;
             EmployeesListView.DataBind();
 
-            IEnumerable<Ausleihe> list2 = _context.Ausleihe.Where(x => x.PersonenID == userId && x.DatumBis <= now).ToList();
-            ListView2.DataSource = list2;
+
+            IEnumerable<Ausleihe> listAusleihenInactive;
+            IEnumerable<Ausleihe_Spiel> listInactive = Enumerable.Empty<Ausleihe_Spiel>();
+            //get all ausleihe ids
+            listAusleihenInactive = _context.Ausleihe.Where(x => x.PersonenID == userId).ToList();
+
+            foreach (Ausleihe ausleiheid in listAusleihenInactive)
+            {
+                var id = ausleiheid.Ausleihe_ID;
+                listInactive = _context.Ausleihe_Spiel.Where(x => x.Ausleihe_ID == id && x.DatumBis <= now).ToList();
+            }
+            ListView2.DataSource = listInactive;
             ListView2.DataBind();
+
+
+
+            /*IEnumerable<Ausleihe> list2 = _context.Ausleihe.Where(x => x.PersonenID == userId && x.DatumBis <= now).ToList();
+            ListView2.DataSource = list2;
+            ListView2.DataBind();*/
         }
     }
 }

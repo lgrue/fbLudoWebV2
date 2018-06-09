@@ -17,6 +17,7 @@ namespace Model
         public int Ausleihe_Spiel_ID { get; set; }
         public Nullable<int> Ausleihe_ID { get; set; }
         public Nullable<int> Spiel_ID { get; set; }
+        public string Name { get; set; }
         public System.DateTime DatumVon { get; set; }
         public System.DateTime DatumBis { get; set; }
         public int AnzVerlaengerungen { get; set; }

@@ -13,10 +13,10 @@ namespace Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class fbLudoDBEntities1 : DbContext
+    public partial class fbLudoDBEntities2 : DbContext
     {
-        public fbLudoDBEntities1()
-            : base("name=fbLudoDBEntities1")
+        public fbLudoDBEntities2()
+            : base("name=fbLudoDBEntities2")
         {
         }
     

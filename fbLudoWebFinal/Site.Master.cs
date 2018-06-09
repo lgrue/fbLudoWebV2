@@ -87,6 +87,12 @@ namespace fbLudoWebFinal
                 siteMap = GetSiteMapDataSource("~/AdminStartseite");
                 CreateMenuControl(siteMap);
             }
+            else
+            {
+                siteMap = GetSiteMapDataSource("~/Employee.aspx");
+            }
+            
+            CreateMenuControl(siteMap);
 
         }
 

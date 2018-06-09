@@ -13,6 +13,24 @@ namespace fbLudoWebFinal {
     public partial class SiteMaster {
         
         /// <summary>
+        /// SiteMapDataSource1-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SiteMapDataSource SiteMapDataSource1;
+        
+        /// <summary>
+        /// Menu1-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Menu Menu1;
+        
+        /// <summary>
         /// MainContent-Steuerelement
         /// </summary>
         /// <remarks>

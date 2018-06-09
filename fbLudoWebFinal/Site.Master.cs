@@ -69,7 +69,25 @@ namespace fbLudoWebFinal
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            switch (Context.User.Identity.GetUserName())
+            {
+                case "kunde@fbWebLudo.com":
+                    SiteMapDataSource1.StartingNodeUrl = "~/Employee.aspx";
+                    SiteMapDataSource1.StartingNodeOffset = -1;
+                    break;
+                case "mitarbeiter@fbWebLudo.com":
+                    SiteMapDataSource1.StartingNodeUrl = "~/Employer.aspx";
+                    SiteMapDataSource1.StartingNodeOffset = -1;
+                    break;
+                case "admin@fbWebLudo.com":
+                    SiteMapDataSource1.StartingNodeUrl = "~/admin.aspx";
+                    SiteMapDataSource1.StartingNodeOffset = -1;
+                    break;
+                default:
+                    SiteMapDataSource1.StartingNodeUrl = "~/Employee.aspx";
+                    SiteMapDataSource1.StartingNodeOffset = -1;
+                    break;
+            }
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

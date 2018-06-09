@@ -74,21 +74,25 @@ namespace fbLudoWebFinal
 
             if(HttpContext.Current.User.IsInRole("Kunde"))
             {
-                siteMap = GetSiteMapDataSource("~/Employee.aspx");
+                siteMap = GetSiteMapDataSource("~/KundenStartseite");
                 CreateMenuControl(siteMap);
             }
             else if (HttpContext.Current.User.IsInRole("Mitarbeiter"))
             {
-                siteMap = GetSiteMapDataSource("~/Employer.aspx");
-                CreateMenuControl(siteMap); 
+                siteMap = GetSiteMapDataSource("~/MitarbeiterStartseite");
+                CreateMenuControl(siteMap);
             }
             else if (HttpContext.Current.User.IsInRole("Admin"))
             {
-                siteMap = GetSiteMapDataSource("~/admin.aspx");
+                siteMap = GetSiteMapDataSource("~/AdminStartseite");
                 CreateMenuControl(siteMap);
             }
+            else
+            {
+                siteMap = GetSiteMapDataSource("~/Employee.aspx");
+            }
             
-            
+            CreateMenuControl(siteMap);
 
         }
 
@@ -109,6 +113,7 @@ namespace fbLudoWebFinal
             xmlSiteMap.BuildSiteMap();
             SiteMapDataSource siteMap = new SiteMapDataSource();
             siteMap.StartingNodeUrl = startingNodeUrl;
+            siteMap.ShowStartingNode = false;
             return siteMap;
         }
 

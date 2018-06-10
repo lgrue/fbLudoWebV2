@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fbLudoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ausleihe">
+    <Key>
+      <PropertyRef Name="Ausleihe_ID" />
+    </Key>
+    <Property Name="Ausleihe_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonenID" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Ausleihe_Spiel" Relationship="Self.FK__Ausleihe___Ausle__5FB337D6" FromRole="Ausleihe" ToRole="Ausleihe_Spiel" />
+  </EntityType>
+  <EntityType Name="Ausleihe_Spiel">
+    <Key>
+      <PropertyRef Name="Ausleihe_Spiel_ID" />
+    </Key>
+    <Property Name="Ausleihe_Spiel_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ausleihe_ID" Type="Int32" />
+    <Property Name="Spiel_ID" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DatumVon" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DatumBis" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AnzVerlaengerungen" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ausleihe" Relationship="Self.FK__Ausleihe___Ausle__5FB337D6" FromRole="Ausleihe_Spiel" ToRole="Ausleihe" />
+    <NavigationProperty Name="Spiel" Relationship="Self.FK__Ausleihe___Spiel__60A75C0F" FromRole="Ausleihe_Spiel" ToRole="Spiel" />
+  </EntityType>
+  <EntityType Name="Code">
+    <Key>
+      <PropertyRef Name="Code_ID" />
+    </Key>
+    <Property Name="Code_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Aktiv" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Spiel">
+    <Key>
+      <PropertyRef Name="Spiel_ID" />
+    </Key>
+    <Property Name="Spiel_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ausgeliehen" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Ausleihe_Spiel" Relationship="Self.FK__Ausleihe___Spiel__60A75C0F" FromRole="Spiel" ToRole="Ausleihe_Spiel" />
+  </EntityType>
+  <Association Name="FK__Ausleihe___Ausle__5FB337D6">
+    <End Role="Ausleihe" Type="Self.Ausleihe" Multiplicity="0..1" />
+    <End Role="Ausleihe_Spiel" Type="Self.Ausleihe_Spiel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ausleihe">
+        <PropertyRef Name="Ausleihe_ID" />
+      </Principal>
+      <Dependent Role="Ausleihe_Spiel">
+        <PropertyRef Name="Ausleihe_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ausleihe___Spiel__60A75C0F">
+    <End Role="Spiel" Type="Self.Spiel" Multiplicity="0..1" />
+    <End Role="Ausleihe_Spiel" Type="Self.Ausleihe_Spiel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spiel">
+        <PropertyRef Name="Spiel_ID" />
+      </Principal>
+      <Dependent Role="Ausleihe_Spiel">
+        <PropertyRef Name="Spiel_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="fbLudoDBEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ausleihe" EntityType="Self.Ausleihe" />
+    <EntitySet Name="Ausleihe_Spiel" EntityType="Self.Ausleihe_Spiel" />
+    <EntitySet Name="Code" EntityType="Self.Code" />
+    <EntitySet Name="Spiel" EntityType="Self.Spiel" />
+    <AssociationSet Name="FK__Ausleihe___Ausle__5FB337D6" Association="Self.FK__Ausleihe___Ausle__5FB337D6">
+      <End Role="Ausleihe" EntitySet="Ausleihe" />
+      <End Role="Ausleihe_Spiel" EntitySet="Ausleihe_Spiel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ausleihe___Spiel__60A75C0F" Association="Self.FK__Ausleihe___Spiel__60A75C0F">
+      <End Role="Spiel" EntitySet="Spiel" />
+      <End Role="Ausleihe_Spiel" EntitySet="Ausleihe_Spiel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -181,6 +181,7 @@
   <ItemGroup>
     <Content Include="App_Data\ausleihen.txt" />
     <Content Include="App_Data\spiele.txt" />
+    <Content Include="MitgliedschaftRollen.aspx" />
     <Content Include="NeueAusleihe.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
     <Content Include="Account\Confirm.aspx" />
@@ -213,6 +214,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="NeuesMitglied.aspx" />
     <Content Include="PreiseAnpassen.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -357,6 +359,13 @@
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="MitgliedschaftRollen.aspx.cs">
+      <DependentUpon>MitgliedschaftRollen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MitgliedschaftRollen.aspx.designer.cs">
+      <DependentUpon>MitgliedschaftRollen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NeueAusleihe.aspx.cs">
       <DependentUpon>NeueAusleihe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -402,6 +411,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="NeuesMitglied.aspx.cs">
+      <DependentUpon>NeuesMitglied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NeuesMitglied.aspx.designer.cs">
+      <DependentUpon>NeuesMitglied.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PreiseAnpassen.aspx.cs">
       <DependentUpon>PreiseAnpassen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

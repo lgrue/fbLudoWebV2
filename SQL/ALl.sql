@@ -33,9 +33,9 @@ create table Code(
 	Code_ID int primary key IDENTITY(1,1) not null,
 	Code nvarchar(40) unique not null,
 	Aktiv bit not null,
-	IsCode bit not null,
-	IsMitarbeiter bit not null,
-	IsAdmin bit not null,
+	IsCode bit,
+	IsMitarbeiter bit,
+	IsAdmin bit
 );
 
 insert into Kategorie(Bezeichnung) values('Kindergarten');
@@ -49,7 +49,9 @@ insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) value
 insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Honshu', 2, '7.50', '10.00', 0);
 insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Ji-Yeong', 3, '10.00', '12.50', 0);
 
-insert into Code(Code, Aktiv, IsCode, IsMitarbeiter, IsAdmin) values('Test1234!' , 1, 1, 0, 0)
+insert into Code(Code, Aktiv, IsCode, IsMitarbeiter, IsAdmin) values('Test1234!' , 1, 1, 0, 0);
+insert into Code(Code, Aktiv, IsCode, IsMitarbeiter, IsAdmin) values('Test12345!' , 1, 0, 1, 0);
+insert into Code(Code, Aktiv, IsCode, IsMitarbeiter, IsAdmin) values('Test123456!' , 1, 0, 0, 1);
 
 /*insert into Ausleihe(PersonenID) values('0edb29ba-f57c-4869-844e-2a1c6c7e3a3c');
 insert into Ausleihe(PersonenID) values('5fdc3c86-6790-409a-aa8b-1983f174d3c4');

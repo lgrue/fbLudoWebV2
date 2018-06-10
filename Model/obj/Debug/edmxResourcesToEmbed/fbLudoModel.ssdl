@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fbLudoDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ausleihe">
+    <Key>
+      <PropertyRef Name="Ausleihe_ID" />
+    </Key>
+    <Property Name="Ausleihe_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonenID" Type="nvarchar" MaxLength="80" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ausleihe_Spiel">
+    <Key>
+      <PropertyRef Name="Ausleihe_Spiel_ID" />
+    </Key>
+    <Property Name="Ausleihe_Spiel_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ausleihe_ID" Type="int" />
+    <Property Name="Spiel_ID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DatumVon" Type="date" Nullable="false" />
+    <Property Name="DatumBis" Type="date" Nullable="false" />
+    <Property Name="AnzVerlaengerungen" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Code">
+    <Key>
+      <PropertyRef Name="Code_ID" />
+    </Key>
+    <Property Name="Code_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Aktiv" Type="bit" Nullable="false" />
+    <Property Name="IsCode" Type="bit" />
+    <Property Name="IsMitarbeiter" Type="bit" />
+    <Property Name="IsAdmin" Type="bit" />
+  </EntityType>
+  <EntityType Name="Kategorie">
+    <Key>
+      <PropertyRef Name="Kategorie_ID" />
+    </Key>
+    <Property Name="Kategorie_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bezeichnung" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Spiel">
+    <Key>
+      <PropertyRef Name="Spiel_ID" />
+    </Key>
+    <Property Name="Spiel_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Kategorie" Type="int" />
+    <Property Name="Vereinstarif" Type="float" Nullable="false" />
+    <Property Name="Normaltarif" Type="float" Nullable="false" />
+    <Property Name="Ausgeliehen" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Ausleihe___Ausle__4BAC3F29">
+    <End Role="Ausleihe" Type="Self.Ausleihe" Multiplicity="0..1" />
+    <End Role="Ausleihe_Spiel" Type="Self.Ausleihe_Spiel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ausleihe">
+        <PropertyRef Name="Ausleihe_ID" />
+      </Principal>
+      <Dependent Role="Ausleihe_Spiel">
+        <PropertyRef Name="Ausleihe_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ausleihe___Spiel__4CA06362">
+    <End Role="Spiel" Type="Self.Spiel" Multiplicity="0..1" />
+    <End Role="Ausleihe_Spiel" Type="Self.Ausleihe_Spiel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spiel">
+        <PropertyRef Name="Spiel_ID" />
+      </Principal>
+      <Dependent Role="Ausleihe_Spiel">
+        <PropertyRef Name="Spiel_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Spiel__Kategorie__46E78A0C">
+    <End Role="Kategorie" Type="Self.Kategorie" Multiplicity="0..1" />
+    <End Role="Spiel" Type="Self.Spiel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategorie">
+        <PropertyRef Name="Kategorie_ID" />
+      </Principal>
+      <Dependent Role="Spiel">
+        <PropertyRef Name="Kategorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="fbLudoDBModel1StoreContainer">
+    <EntitySet Name="Ausleihe" EntityType="Self.Ausleihe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ausleihe_Spiel" EntityType="Self.Ausleihe_Spiel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Code" EntityType="Self.Code" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Spiel" EntityType="Self.Spiel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Ausleihe___Ausle__4BAC3F29" Association="Self.FK__Ausleihe___Ausle__4BAC3F29">
+      <End Role="Ausleihe" EntitySet="Ausleihe" />
+      <End Role="Ausleihe_Spiel" EntitySet="Ausleihe_Spiel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ausleihe___Spiel__4CA06362" Association="Self.FK__Ausleihe___Spiel__4CA06362">
+      <End Role="Spiel" EntitySet="Spiel" />
+      <End Role="Ausleihe_Spiel" EntitySet="Ausleihe_Spiel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Spiel__Kategorie__46E78A0C" Association="Self.FK__Spiel__Kategorie__46E78A0C">
+      <End Role="Kategorie" EntitySet="Kategorie" />
+      <End Role="Spiel" EntitySet="Spiel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -5,11 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4a934d4a454341fe9c3959ffb2b72df5" Name="Diagram1">
-        <EntityTypeShape EntityType="fbLudoDBModel1.Ausleihe" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="fbLudoDBModel1.Ausleihe_Spiel" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="fbLudoDBModel1.Spiel" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <AssociationConnector Association="fbLudoDBModel1.FK__Ausleihe___Ausle__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="fbLudoDBModel1.FK__Ausleihe___Spiel__60A75C0F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="fbLudoDBModel1.Ausleihe" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="fbLudoDBModel1.Ausleihe_Spiel" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="fbLudoDBModel1.Code" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="fbLudoDBModel1.Kategorie" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="fbLudoDBModel1.Spiel" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="fbLudoDBModel1.FK__Ausleihe___Ausle__4BAC3F29" />
+        <AssociationConnector Association="fbLudoDBModel1.FK__Ausleihe___Spiel__4CA06362" />
+        <AssociationConnector Association="fbLudoDBModel1.FK__Spiel__Kategorie__46E78A0C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="fbLudoDBModelStoreContainer" CdmEntityContainer="fbLudoDBEntities3">
+    <EntitySetMapping Name="Ausleihe">
+      <EntityTypeMapping TypeName="fbLudoDBModel.Ausleihe">
+        <MappingFragment StoreEntitySet="Ausleihe">
+          <ScalarProperty Name="Ausleihe_ID" ColumnName="Ausleihe_ID" />
+          <ScalarProperty Name="PersonenID" ColumnName="PersonenID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ausleihe_Spiel">
+      <EntityTypeMapping TypeName="fbLudoDBModel.Ausleihe_Spiel">
+        <MappingFragment StoreEntitySet="Ausleihe_Spiel">
+          <ScalarProperty Name="Ausleihe_Spiel_ID" ColumnName="Ausleihe_Spiel_ID" />
+          <ScalarProperty Name="Ausleihe_ID" ColumnName="Ausleihe_ID" />
+          <ScalarProperty Name="Spiel_ID" ColumnName="Spiel_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
+          <ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
+          <ScalarProperty Name="AnzVerlaengerungen" ColumnName="AnzVerlaengerungen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Code">
+      <EntityTypeMapping TypeName="fbLudoDBModel.Code">
+        <MappingFragment StoreEntitySet="Code">
+          <ScalarProperty Name="Code_ID" ColumnName="Code_ID" />
+          <ScalarProperty Name="Code1" ColumnName="Code" />
+          <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Spiel">
+      <EntityTypeMapping TypeName="fbLudoDBModel.Spiel">
+        <MappingFragment StoreEntitySet="Spiel">
+          <ScalarProperty Name="Spiel_ID" ColumnName="Spiel_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Ausgeliehen" ColumnName="Ausgeliehen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

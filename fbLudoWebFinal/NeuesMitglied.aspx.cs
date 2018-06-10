@@ -10,7 +10,7 @@ using System.Web.Security;
 namespace fbLudoWebFinal
 {
     public partial class NeuesMitglied : System.Web.UI.Page
-    {
+    { 
         private Model.fbLudoDBEntities3 _context;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -23,13 +23,19 @@ namespace fbLudoWebFinal
             Code code = new Code()
             {
                 Code1 = Membership.GeneratePassword(10, 2),
-                Aktiv = true
+                Aktiv = true,
+                IsCode = true,
+                IsMitarbeiter = false,
+                IsAdmin = false
             };
+
             _context = new fbLudoDBEntities3();
             _context.Code.Add(code);
             _context.SaveChanges();
             SuccessText.Text = code.Code1;
             SuccessMessage.Visible = true;
         }
+
     }
+
 }

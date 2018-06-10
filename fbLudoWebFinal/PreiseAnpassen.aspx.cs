@@ -15,7 +15,7 @@ namespace fbLudoWebFinal
 {
     public partial class PreiseAnpassen : Page
     {
-        private Model.fbLudoDBEntities _context;
+        private Model.fbLudoDBEntities3 _context;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,7 +33,7 @@ namespace fbLudoWebFinal
                     if (!Page.IsPostBack)
                     {
                         var userId = User.Identity.GetUserId();
-                        _context = new fbLudoDBEntities();
+                        _context = new fbLudoDBEntities3();
                         IEnumerable<Spiel> list = _context.Spiel.Where(x => x.Ausgeliehen == false).ToList();
 
                         RadioButtonList.DataSource = list;

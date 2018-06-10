@@ -57,11 +57,11 @@
                             <li><a runat="server" href="~/MitglidschaftRollen">Mitglidschaft & Rollen</a></li>
                         <% } %>
                         <% if (HttpContext.Current.User.IsInRole("Mitarbeiter") || HttpContext.Current.User.IsInRole("Admin")) { %>
-                            <li><a runat="server" href="~/NeueSpiele">Neue Spiele</a></li>
-                            <li><a runat="server" href="~/NeuesMitglied1">Neues Mitglied</a></li>
+                            <li><a runat="server" href="#">Neue Spiele</a></li>
+                            <li><a runat="server" href="~/NeuesMitglied">Neues Mitglied</a></li>
                         <% } %>
                         <% if (HttpContext.Current.User.IsInRole("Admin")) { %>
-                            <li><a runat="server" href="~/ApplikationsEinstellungen">Applikations Einstellungen</a></li>
+                            <li><a runat="server" href="#">Applikations Einstellungen</a></li>
                             <li><a runat="server" href="~/PreiseAnpassen">Preise Anpassen</a></li>
                         <% } %>
                     </ul>

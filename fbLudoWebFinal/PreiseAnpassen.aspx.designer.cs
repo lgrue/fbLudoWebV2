@@ -10,51 +10,51 @@
 namespace fbLudoWebFinal {
     
     
-    public partial class NeueAusleihe {
+    public partial class PreiseAnpassen {
         
         /// <summary>
-        /// successMessage-Steuerelement
+        /// RadioButtonList-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder successMessage;
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList;
         
         /// <summary>
-        /// DropDownList1-Steuerelement
+        /// btnChoose-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.Button btnChoose;
         
         /// <summary>
-        /// CheckListSpiele-Steuerelement
+        /// newVereinstarif-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList CheckListSpiele;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl newVereinstarif;
         
         /// <summary>
-        /// errormsg-Steuerelement
+        /// newNormaltarif-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errormsg;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl newNormaltarif;
         
         /// <summary>
-        /// btnAusleihe-Steuerelement
+        /// btnChange-Steuerelement
         /// </summary>
         /// <remarks>
         /// Automatisch generiertes Feld
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAusleihe;
+        protected global::System.Web.UI.WebControls.Button btnChange;
     }
 }

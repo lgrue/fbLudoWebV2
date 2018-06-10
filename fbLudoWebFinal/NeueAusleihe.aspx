@@ -14,5 +14,6 @@
     <p>Es können bis zu <b>3 Spiele</b> ausgelehnt werden.</p>
     <!-- <asp:DropDownList id="DropDownList1" runat="server"></asp:DropDownList> -->
     <asp:CheckBoxList id="CheckListSpiele" runat="server"></asp:CheckBoxList>
+    <p id="errormsg" contenteditable="true" runat="server" style="color: red"></p>
     <asp:Button runat="server" ID="btnAusleihe" Text="Ausleihe" OnClick="ausleihen" />
 </asp:Content>

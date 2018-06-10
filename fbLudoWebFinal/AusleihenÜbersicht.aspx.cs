@@ -21,7 +21,7 @@ namespace fbLudoWebFinal
     public partial class AusleihenÜbersicht : Page
     {
 
-        private Model.fbLudoDBEntities3 _context;
+        private Model.fbLudoDBEntities _context;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,7 +51,7 @@ namespace fbLudoWebFinal
         {
             var id = (sender as LinkButton).CommandArgument;
             var idInt = int.Parse(id);
-            _context = new fbLudoDBEntities3();
+            _context = new fbLudoDBEntities();
             var ausleihe = _context.Ausleihe_Spiel.FirstOrDefault(x => x.Ausleihe_ID == idInt);
             if (ausleihe.AnzVerlaengerungen <= 2)
             {
@@ -70,7 +70,7 @@ namespace fbLudoWebFinal
         {
             var id = (sender as LinkButton).CommandArgument;
             var idInt = int.Parse(id);
-            _context = new fbLudoDBEntities3();
+            _context = new fbLudoDBEntities();
             var ausleihe = _context.Ausleihe_Spiel.FirstOrDefault(x => x.Ausleihe_ID == idInt);
             var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == ausleihe.Spiel_ID);
             spiel.Ausgeliehen = false;
@@ -85,7 +85,7 @@ namespace fbLudoWebFinal
         private void LoadData(string userId)
         {
             DateTime now = DateTime.Now;
-            _context = new fbLudoDBEntities3();
+            _context = new fbLudoDBEntities();
             IEnumerable<Ausleihe> listAusleihen;
             IEnumerable<Ausleihe_Spiel> list = Enumerable.Empty<Ausleihe_Spiel>();
             

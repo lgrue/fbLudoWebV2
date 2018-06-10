@@ -1,7 +1,16 @@
 use fbLudoDB;
+
+create table Kategorie(
+	Kategorie_ID int primary key IDENTITY(1,1) not null,
+	Bezeichnung nvarchar(50) not null
+);
+
 create table Spiel(
 	Spiel_ID int primary key IDENTITY(1,1) not null,
 	Name nvarchar(50) not null,
+	Kategorie int foreign key references Kategorie(Kategorie_ID),
+	Vereinstarif float not null,
+	Normaltarif float not null,
 	Ausgeliehen bit not null
 );
 
@@ -26,14 +35,18 @@ create table Code(
 	Aktiv bit not null,
 );
 
-insert into Spiel(Name, Ausgeliehen) values('Roll for it!', 0);
-insert into Spiel(Name, Ausgeliehen) values('Splendor', 0);
-insert into Spiel(Name, Ausgeliehen) values('Qwixx', 0);
-insert into Spiel(Name, Ausgeliehen) values('King of Tokyo', 0);
-insert into Spiel(Name, Ausgeliehen) values('Honshu', 0);
-insert into Spiel(Name, Ausgeliehen) values('Ji-Yeong', 0);
+insert into Kategorie(Bezeichnung) values('Kindergarten');
+insert into Kategorie(Bezeichnung) values('Unterstufe');
+insert into Kategorie(Bezeichnung) values('Oberstufe');
 
-insert into Ausleihe(PersonenID) values('0edb29ba-f57c-4869-844e-2a1c6c7e3a3c');
+insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Roll for it!', 1, '5.00', '7.50', 0);
+insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Splendor', 1, '5.00', '7.50', 0);
+insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Qwixx', 2, '7.50', '10.00', 0);
+insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('King of Tokyo', 2, '7.50', '10.00', 0);
+insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Honshu', 2, '7.50', '10.00', 0);
+insert into Spiel(Name, Kategorie, Vereinstarif, Normaltarif, Ausgeliehen) values('Ji-Yeong', 3, '10.00', '12.50', 0);
+
+/*insert into Ausleihe(PersonenID) values('0edb29ba-f57c-4869-844e-2a1c6c7e3a3c');
 insert into Ausleihe(PersonenID) values('5fdc3c86-6790-409a-aa8b-1983f174d3c4');
 insert into Ausleihe(PersonenID) values('5fdc3c86-6790-409a-aa8b-1983f174d3c4');
 
@@ -42,4 +55,4 @@ insert into Ausleihe_Spiel(Ausleihe_ID, Spiel_ID, Name, DatumVon, DatumBis, AnzV
 insert into Ausleihe_Spiel(Ausleihe_ID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values(2, 3, 'Qwixx', convert(datetime,'06.06.18',4), convert(datetime,'13.06.18',4), 0);
 insert into Ausleihe_Spiel(Ausleihe_ID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values(3, 4, 'King of Tokyo', convert(datetime,'08.06.18',4), convert(datetime,'15.06.18',4), 0);
 insert into Ausleihe_Spiel(Ausleihe_ID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values(3, 5, 'Honshu', convert(datetime,'08.06.18',4), convert(datetime,'15.06.18',4), 0);
-insert into Ausleihe_Spiel(Ausleihe_ID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values(3, 6, 'Ji-Yeong', convert(datetime,'08.06.18',4), convert(datetime,'15.06.18',4), 0);
+insert into Ausleihe_Spiel(Ausleihe_ID, Spiel_ID, Name, DatumVon, DatumBis, AnzVerlaengerungen) values(3, 6, 'Ji-Yeong', convert(datetime,'08.06.18',4), convert(datetime,'15.06.18',4), 0);*/

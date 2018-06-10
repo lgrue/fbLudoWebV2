@@ -15,7 +15,7 @@ namespace fbLudoWebFinal
 {
     public partial class NeueAusleihe : Page
     {
-        private Model.fbLudoDBEntities3 _context;
+        private Model.fbLudoDBEntities _context;
 
         protected string SuccessMessage
         {
@@ -39,7 +39,7 @@ namespace fbLudoWebFinal
                     if (!Page.IsPostBack)
                     {
                         var userId = User.Identity.GetUserId();
-                        _context = new fbLudoDBEntities3();
+                        _context = new fbLudoDBEntities();
                         IEnumerable<Spiel> list = _context.Spiel.Where(x => x.Ausgeliehen == false).ToList();
 
                         CheckListSpiele.DataSource = list;
@@ -75,41 +75,55 @@ namespace fbLudoWebFinal
             System.TimeSpan duration = new System.TimeSpan(7, 0, 0, 0);
             DateTime deadline = currentTime.Add(duration);
             var counter = 0;
+            var anzItems = 0;
 
             foreach (ListItem item in CheckListSpiele.Items) {
                 if (item.Selected) {
-                    //var spielid = int.Parse(DropDownList1.SelectedValue item.Value);
-                    //var spielname = Convert.ToString(DropDownList1.SelectedItem);
-
-                    var spielid = int.Parse(item.Value);
-                    var spielname = item.Text;
-
-                    Ausleihe ausleihe = new Ausleihe()
-                    {
-                        PersonenID = userid
-                    };
-                    Ausleihe_Spiel ausleihe_spiel = new Ausleihe_Spiel()
-                    {
-                        Ausleihe_ID = ausleihe.Ausleihe_ID,
-                        Spiel_ID = spielid,
-                        Name = spielname,
-                        DatumVon = currentTime,
-                        DatumBis = deadline,
-                        AnzVerlaengerungen = counter
-                    };
-                    _context = new fbLudoDBEntities3();
-                    _context.Ausleihe.Add(ausleihe);
-                    _context.Ausleihe_Spiel.Add(ausleihe_spiel);
-                    //_context.SaveChanges();
-
-                    var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == spielid);
-                    spiel.Ausgeliehen = true;
-                    _context.Entry(spiel).State = EntityState.Modified;
-                    _context.SaveChanges();
+                    anzItems++;
                 }
             }
-            
-            Response.Redirect("/AusleihenÜbersicht");
+
+            if (anzItems <= 3)
+            {
+                foreach (ListItem item in CheckListSpiele.Items)
+                {
+                    if (item.Selected)
+                    {
+                        //var spielid = int.Parse(DropDownList1.SelectedValue item.Value);
+                        //var spielname = Convert.ToString(DropDownList1.SelectedItem);
+
+                        var spielid = int.Parse(item.Value);
+                        var spielname = item.Text;
+
+                        Ausleihe ausleihe = new Ausleihe()
+                        {
+                            PersonenID = userid
+                        };
+                        Ausleihe_Spiel ausleihe_spiel = new Ausleihe_Spiel()
+                        {
+                            Ausleihe_ID = ausleihe.Ausleihe_ID,
+                            Spiel_ID = spielid,
+                            Name = spielname,
+                            DatumVon = currentTime,
+                            DatumBis = deadline,
+                            AnzVerlaengerungen = counter
+                        };
+                        _context = new fbLudoDBEntities();
+                        _context.Ausleihe.Add(ausleihe);
+                        _context.Ausleihe_Spiel.Add(ausleihe_spiel);
+                        //_context.SaveChanges();
+
+                        var spiel = _context.Spiel.FirstOrDefault(x => x.Spiel_ID == spielid);
+                        spiel.Ausgeliehen = true;
+                        _context.Entry(spiel).State = EntityState.Modified;
+                        _context.SaveChanges();
+                    }
+                }
+                Response.Redirect("/AusleihenÜbersicht");
+            }
+            else {
+                errormsg.InnerHtml = "Es wurden zu viele Spiele ausgewählt. Es können maximal 3 Spiele ausgelehnt werden.";
+            }
         }
 
         /*public DataTable ConvertToDataTable(string filePath, int numberOfColumns)

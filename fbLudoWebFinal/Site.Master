@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Eigene ASP.NET-Anwendung</title>
+    <title>fbWebLudo</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -53,11 +53,12 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/NeueAusleihe">Neue Ausleihe</a></li>
                         <li><a runat="server" href="~/AusleihenÜbersicht">Ausleihen Übersicht</a></li>
-                        <% if (HttpContext.Current.User.IsInRole("Kunde")) { %>
-                            <li><a runat="server" href="~/MitglidschaftRollen">Mitglidschaft Rollen</a></li>
+                        <% if (HttpContext.Current.User.IsInRole("Kunde") || HttpContext.Current.User.IsInRole("Mitarbeiter")) { %>
+                            <li><a runat="server" href="~/MitglidschaftRollen">Mitglidschaft & Rollen</a></li>
                         <% } %>
                         <% if (HttpContext.Current.User.IsInRole("Mitarbeiter") || HttpContext.Current.User.IsInRole("Admin")) { %>
                             <li><a runat="server" href="~/NeueSpiele">Neue Spiele</a></li>
+                            <li><a runat="server" href="~/NeuesMitglied1">Neues Mitglied</a></li>
                         <% } %>
                         <% if (HttpContext.Current.User.IsInRole("Admin")) { %>
                             <li><a runat="server" href="~/ApplikationsEinstellungen">Applikations Einstellungen</a></li>
@@ -73,7 +74,7 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Account</a></li>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Abmelden" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
